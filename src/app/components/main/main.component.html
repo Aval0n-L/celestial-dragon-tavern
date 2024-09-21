@@ -1,0 +1,25 @@
+<!--======HEADER======-->
+<app-header></app-header>
+<!--==================-->
+
+<!--=====BACKGROUND=====-->
+<div class="backplace" [style.backgroundImage]="backgroundImage">
+  <div class="location">
+      <button class="location-name-button" (click)="navigateToLocations()">{{ locationName }}</button>
+  </div>
+</div>
+<!--==============-->
+
+<!--=====MAIN=====-->
+<div class="main-content">
+  <router-outlet></router-outlet>
+  <!-- <app-locations (locationChanged)="onLocationChanged($event)"></app-locations>
+  <app-effects></app-effects>
+  
+  <app-weather [weatherType]="currentWeather" [intensity]="weatherIntensity"></app-weather> -->
+</div>
+<!--==============-->
+
+<!--======FOOTER======-->
+<app-footer></app-footer>
+<!--==================-->

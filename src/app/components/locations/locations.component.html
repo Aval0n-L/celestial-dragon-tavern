@@ -1,0 +1,9 @@
+<div class="locations">
+    <button *ngFor="let location of locations" (click)="selectLocation(location)">
+      <div class="image-container">
+        <img [src]="location.image" alt="{{ location.name }}">
+        <div class="text-overlay">{{ location.name }}</div>
+      </div>
+    </button>
+</div>
+  

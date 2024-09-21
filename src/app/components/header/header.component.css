@@ -1,0 +1,55 @@
+.header {
+    position: fixed;
+    top: 0; /* Закрепляет элемент у верхней границы экрана */
+    left: 0;
+    width: 100%; /* Растягивает header на всю ширину экрана */
+    z-index: 1000; /* Для того, чтобы header был поверх других элементов */
+    background-color: #333; /* Цвет фона */
+    color: white;
+    padding: 10px 20px;
+    
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    height: 60px; /* 25% от высоты окна */
+    background-size: cover;
+    background-position: center;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: center; /* Центрирование содержимого */
+}
+
+/* Контейнер для логотипа и названия таверны */
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Расстояние между логотипом и названием */
+}
+
+/* Лого */
+.logo {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+}
+
+/* Название таверны */
+.tavern-name {
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  font-size: 2rem;
+}
+
+/* Медиа-запросы для устройств с шириной экрана до 768px */
+@media (max-width: 768px) {
+    .tavern-name {
+      font-size: 2rem;
+    }
+}
+  
+  /* Медиа-запросы для устройств с шириной экрана до 480px */
+@media (max-width: 480px) {
+    .tavern-name {
+      font-size: 1rem;
+    }
+}

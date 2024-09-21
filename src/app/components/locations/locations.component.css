@@ -1,0 +1,74 @@
+.locations {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+}
+
+.locations button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(25% - 40px); /* Четыре кнопки в ряд с учетом отступов */
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Изменим стили для изображения */
+.image-container {
+  position: relative; /* Позволяет разместить текст на изображении */
+  width: 100%; /* Полная ширина кнопки */
+}
+
+.locations img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Текст поверх изображения */
+.text-overlay {
+  position: absolute;
+  bottom: 10px; /* Позиционирование текста снизу */
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+  text-align: center;
+  width: 100%;
+}
+
+/* Медиа-запрос для экранов до 1024px (три кнопки в ряд) */
+@media (max-width: 1024px) {
+    .locations button {
+      width: calc(33.33% - 40px);
+    }
+}
+  
+  /* Медиа-запрос для экранов до 768px (две кнопки в ряд) */
+@media (max-width: 768px) {
+    .locations button {
+      width: calc(50% - 40px);
+    }
+}
+  
+  /* Медиа-запрос для экранов до 480px (одна кнопка в ряд) */
+@media (max-width: 480px) {
+    .locations button {
+      width: 100%;
+    }
+  
+    .locations {
+      gap: 10px;
+      padding: 10px;
+    }
+  
+    .locations span {
+      font-size: 1rem;
+    }
+}

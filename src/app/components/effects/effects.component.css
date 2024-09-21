@@ -1,0 +1,256 @@
+.effects {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Три колонки */
+  gap: 30px;
+  padding: 20px;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  align-items: center;
+}
+
+.effect-group {
+  display: flex;
+  flex-direction: column; /* Колонка для заголовка, бегунка и кнопок */
+  gap: 20px; /* Отступы между элементами */
+  width: 100%;
+}
+
+.effect-group h3 {
+  flex-shrink: 0; /* Заголовок занимает только нужное место */
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center; /* Центрируем заголовок и бегунок по вертикали */
+  gap: 15px; /* Отступ между заголовком и бегунком */
+  width: 100%;
+}
+
+input[type="range"] {
+  flex-grow: 1; /* Позволяет бегунку занимать максимальное пространство */
+  margin-top: 10px;
+  width: 100%; /* Убедимся, что бегунок занимает всю ширину */
+}
+
+h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  white-space: nowrap; /* Не переносить заголовок */
+}
+
+.styled-range {
+  -webkit-appearance: none;
+  width: 100%; /* Бегунок занимает всю доступную ширину */
+  height: 4px;
+  border-radius: 5px;
+  outline: none;
+  transition: background 0.3s;
+}
+
+.song {
+  background: #f1b228;
+}
+.song:hover {
+  background: #e4c687;
+}
+
+.weather {
+  background: #076fe6;
+}
+.weather:hover {
+  background: #5ba8ff;
+}
+
+/* Стили для кнопок */
+.buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.buttons button {
+  font-size: 0.8rem;
+  cursor: pointer;
+  background-color: none;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 1rem;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  height: 6rem;
+  width: 6rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%; /* Иконка будет занимать 60% кнопки */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; /* Текст под иконкой */
+  padding-bottom: 5px; /* Отступ для текста под иконкой */
+}
+
+.buttons button.clear {
+  background-color: #000000d0;
+  background-image: url('/weather/clear.png');
+}
+
+.buttons button.overcast {
+  background-image: url('/weather/overcast.png');
+}
+
+.buttons button.rain {
+  background-image: url('/weather/rain.png');
+}
+
+.buttons button.heavy_rain {
+  background-image: url('/weather/heavy_rain.png');
+}
+
+.buttons button.thunderstorm {
+  background-image: url('/weather/thunderstorm.png');
+}
+
+
+/* Медиа-запросы для экрана менее 1024px */
+@media (max-width: 1024px) {
+  .effects {
+    grid-template-columns: 1fr; /* Одна колонка */
+  }
+}
+
+/* Медиа-запрос для экранов до 768px */
+@media (max-width: 768px) {  
+  .effect-group {
+      align-items: flex-start;
+  }
+
+  .effect-group h3 {
+      font-size: 1.3rem;
+  }
+}
+
+/* Медиа-запрос для экранов до 480px */
+@media (max-width: 480px) {
+  .effect-group h3 {
+      font-size: 1.2rem;
+  }
+
+  .buttons button {
+      font-size: 0.9rem;
+  }
+
+  .slider-image {
+      height: 25px; /* Уменьшаем размер изображения для маленьких экранов */
+  }
+}
+
+
+.song::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  background: url('/icons/song.png') no-repeat center;
+  background-size: contain;
+  cursor: pointer;
+  border: none;
+}
+
+.song::-moz-range-thumb {
+  width: 40px;
+  height: 40px;
+  background: url('/icons/song.png') no-repeat center;
+  background-size: contain;
+  cursor: pointer;
+  border: none;
+}
+
+.song::-ms-thumb {
+  width: 40px;
+  height: 40px;
+  background: url('/icons/song.png') no-repeat center;
+  background-size: contain;
+  cursor: pointer;
+  border: none;
+}
+
+
+.weather::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+}
+
+.weather::-moz-range-thumb {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+}
+
+.weather::-ms-thumb {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+}
+
+/* Иконка для диапазона 0-15% */
+.thumb-icon-1::-webkit-slider-thumb {
+  background: url('/icons/sun.png') no-repeat center;
+  background-size: contain;
+}
+
+.thumb-icon-1::-moz-range-thumb {
+  background: url('/icons/sun.png') no-repeat center;
+  background-size: contain;
+}
+
+/* Иконка для диапазона 15-30% */
+.thumb-icon-2::-webkit-slider-thumb {
+  background: url('/icons/cloudy.png') no-repeat center;
+  background-size: contain;
+}
+
+.thumb-icon-2::-moz-range-thumb {
+  background: url('/icons/cloudy.png') no-repeat center;
+  background-size: contain;
+}
+
+/* Иконка для диапазона 30-50% */
+.thumb-icon-3::-webkit-slider-thumb {
+  background: url('/icons/rainy.png') no-repeat center;
+  background-size: contain;
+}
+
+.thumb-icon-3::-moz-range-thumb {
+  background: url('/icons/rainy.png') no-repeat center;
+  background-size: contain;
+}
+
+/* Иконка для диапазона 50-75% */
+.thumb-icon-4::-webkit-slider-thumb {
+  background: url('/icons/shower.png') no-repeat center;
+  background-size: contain;
+}
+
+.thumb-icon-4::-moz-range-thumb {
+  background: url('/icons/shower.png') no-repeat center;
+  background-size: contain;
+}
+
+/* Иконка для диапазона 75-100% */
+.thumb-icon-5::-webkit-slider-thumb {
+  background: url('/icons/thunderstorm.png') no-repeat center;
+  background-size: contain;
+}
+
+.thumb-icon-5::-moz-range-thumb {
+  background: url('/icons/thunderstorm.png') no-repeat center;
+  background-size: contain;
+}
