@@ -1,18 +1,6 @@
 <div class="effects">
     <!-- Songs -->
-    <div class="effect-group">
-        <div class="slider-container">
-            <h3>Songs</h3>
-            <input type="range" min="0" max="100" [(ngModel)]="songVolume" class="styled-range song">
-        </div>
-        <div class="buttons">
-            <button (click)="toggleSong('Explore')">Explore</button>
-            <button (click)="toggleSong('Combat')">Combat</button>
-            <button (click)="toggleSong('Combat')">Chase</button>
-            <button (click)="toggleSong('Combat')">Victory</button>
-            <button (click)="toggleSong('Combat')">Defeat</button>
-        </div>
-    </div>
+    <app-songs></app-songs>
 
     <!-- Time -->
     <div class="effect-group">
@@ -29,42 +17,7 @@
     </div>
 
     <!-- Weather -->
-    <div class="effect-group">
-        <div class="slider-container">
-            <h3>Weather</h3>
-            <input
-            type="range"
-            min="0"
-            max="100"
-            [(ngModel)]="weatherIntensity"
-            (input)="updateThumbIcon()"
-            [ngClass]="currentIconClass"
-            class="styled-range weather"
-            />
-        </div>
-        <div class="buttons">
-            <button (click)="toggleWeather('Clear Sky')" class="clear">Clear Sky</button>
-            <button (click)="toggleWeather('Overcast')" class="overcast">Overcast</button>
-            <button (click)="toggleWeather('Rain')" class="rain">Rain</button>
-            <button (click)="toggleWeather('Heavy Rain')" class="heavy_rain">Heavy Rain</button>
-            <button (click)="toggleWeather('Thunderstorm')" class="thunderstorm">Thunderstorm</button>
-            <button (click)="toggleWeather('Fog')">Fog</button>
-            <button (click)="toggleWeather('Snowfall')">Snowfall</button>
-            <button (click)="toggleWeather('Blizzard')">Blizzard</button>
-            <button (click)="toggleWeather('Windy')">Windy</button>
-            <button (click)="toggleWeather('Gale')">Gale</button>
-            <button (click)="toggleWeather('Hail')">Hail</button>
-            <button (click)="toggleWeather('Heatwave')">Heatwave</button>
-            <button (click)="toggleWeather('Cold Snap')">Cold Snap</button>
-            <button (click)="toggleWeather('Dust Storm')">Dust Storm</button>
-            <button (click)="toggleWeather('Tropical Storm')">Tropical Storm</button>
-            <button (click)="toggleWeather('Ethereal Storm')">Ethereal Storm</button>
-            <button (click)="toggleWeather('Acid Rain')">Acid Rain</button>
-            <button (click)="toggleWeather('Lightning Storm')">Lightning Storm</button>
-            <button (click)="toggleWeather('Purple Rain')">Purple Rain</button>
-            <button (click)="toggleWeather('Meteor Shower')">Meteor Shower</button>
-        </div>
-    </div>
+    <app-weather></app-weather>
 
     <!-- Ambience -->
     <div class="effect-group">

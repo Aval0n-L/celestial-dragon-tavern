@@ -1,0 +1,18 @@
+<div class="effect-group">
+    <div class="slider-container">
+        <h3>Songs</h3>
+        <input 
+            type="range" min="0" max="100" 
+            [(ngModel)]="songVolume"
+            (input)="updateVolume(songVolume)"
+            class="styled-range song">
+    </div>
+    <div class="buttons">
+        <button 
+            *ngFor="let song of songKeys; let i = index"
+            (click)="toggleSong(song)"
+            [ngClass]="{'active-btn': activeSong === song, 'glow-btn': activeSong !== song}">
+            {{ song }}
+        </button>
+    </div>
+</div>

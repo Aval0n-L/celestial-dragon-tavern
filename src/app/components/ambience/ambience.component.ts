@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './ambience.component.html',
-  styleUrl: './ambience.component.css'
+  styleUrl: './ambience.component.scss'
 })
 export class AmbienceComponent {
   toggleAmbience(ambience: string) {

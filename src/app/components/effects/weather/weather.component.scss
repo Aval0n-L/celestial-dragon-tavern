@@ -1,0 +1,110 @@
+@import url('../effects.component.scss');
+
+@import url('../weather/rain/rain.scss');
+@import url('../weather/thunderstorm/thunderstorm.component.scss');
+
+.weather {
+    background: #076fe6;
+}
+.weather:hover {
+    background: #5ba8ff;
+}
+
+.buttons button.clear {
+    background-color: #000000d0;
+    background-image: url('/weather/clear.png');
+}
+
+.buttons button.overcast {
+    background-image: url('/weather/overcast.png');
+}
+
+.buttons button.rain {
+    background-image: url('/weather/rain.png');
+}
+
+.buttons button.heavy_rain {
+    background-image: url('/weather/heavy_rain.png');
+}
+
+.buttons button.thunderstorm {
+    background-image: url('/weather/thunderstorm.png');
+}
+
+.weather::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+}
+
+.weather::-moz-range-thumb {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+}
+
+.weather::-ms-thumb {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+}
+  
+/* Иконка для диапазона 0-15% */
+.sun-icon::-webkit-slider-thumb {
+    background: url('/icons/sun.png') no-repeat center;
+    background-size: contain;
+}
+
+.sun-icon::-moz-range-thumb {
+background: url('/icons/sun.png') no-repeat center;
+background-size: contain;
+}
+
+/* Иконка для диапазона 15-30% */
+.cloudy-icon::-webkit-slider-thumb {
+background: url('/icons/cloudy.png') no-repeat center;
+background-size: contain;
+}
+
+.cloudy-icon::-moz-range-thumb {
+background: url('/icons/cloudy.png') no-repeat center;
+background-size: contain;
+}
+
+/* Иконка для диапазона 30-50% */
+.rainy-icon::-webkit-slider-thumb {
+background: url('/icons/rainy.png') no-repeat center;
+background-size: contain;
+}
+
+.rainy-icon::-moz-range-thumb {
+background: url('/icons/rainy.png') no-repeat center;
+background-size: contain;
+}
+
+/* Иконка для диапазона 50-75% */
+.shower-icon::-webkit-slider-thumb {
+background: url('/icons/shower.png') no-repeat center;
+background-size: contain;
+}
+
+.shower-icon::-moz-range-thumb {
+background: url('/icons/shower.png') no-repeat center;
+background-size: contain;
+}
+
+/* Иконка для диапазона 75-100% */
+.thunderstorm-icon::-webkit-slider-thumb {
+background: url('/icons/thunderstorm.png') no-repeat center;
+background-size: contain;
+}
+
+.thunderstorm-icon::-moz-range-thumb {
+background: url('/icons/thunderstorm.png') no-repeat center;
+background-size: contain;
+}

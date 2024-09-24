@@ -3,7 +3,6 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { EffectsComponent } from '../effects/effects.component';
 import { LocationsComponent } from '../locations/locations.component';
-import { WeatherComponent } from '../weather/weather.component';
 import { AmbienceComponent } from "../ambience/ambience.component";
 import { Router, RouterModule } from '@angular/router';
 import { LocationService } from '../../services/location.service';
@@ -16,18 +15,15 @@ import { LocationService } from '../../services/location.service';
     FooterComponent,
     LocationsComponent,
     EffectsComponent,
-    WeatherComponent,
     AmbienceComponent,
     RouterModule
 ],
   templateUrl: './main.component.html',
-  styleUrl: './main.component.css'
+  styleUrl: './main.component.scss'
 })
 export class MainComponent implements OnInit {
   locationName: string = 'Tavern';
   backgroundImage: string = 'url(images/tavern.webp)';
-  //currentWeather: string = '';
-  //weatherIntensity: number = 50;
 
   constructor(
     private locationService: LocationService,

@@ -8,7 +8,7 @@ import { LocationService } from '../../services/location.service';
   standalone: true,
   imports: [ NgFor ],
   templateUrl: './locations.component.html',
-  styleUrl: './locations.component.css'
+  styleUrl: './locations.component.scss'
 })
 export class LocationsComponent {
   @Output() locationChanged = new EventEmitter<any>();

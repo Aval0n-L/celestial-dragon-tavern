@@ -1,0 +1,37 @@
+@import url('../effects.component.scss');
+
+.song {
+    background: #f1b228;
+}
+.song:hover {
+    background: #e4c687;
+}
+
+.song::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    background: url('/icons/song.png') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+}
+  
+.song::-moz-range-thumb {
+    width: 40px;
+    height: 40px;
+    background: url('/icons/song.png') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+}
+  
+.song::-ms-thumb {
+    width: 40px;
+    height: 40px;
+    background: url('/icons/song.png') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+}

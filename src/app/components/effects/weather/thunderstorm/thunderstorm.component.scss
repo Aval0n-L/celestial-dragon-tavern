@@ -1,0 +1,48 @@
+/* Миксины для удобства */
+@mixin full-size {
+    width: 100%;
+    height: 100%;
+}
+  
+@mixin absolute-position {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+  
+/* Контейнер для анимации */
+.thunderstorm-container {
+  @include full-size;
+  @include absolute-position;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1000;
+  pointer-events: none;
+
+  &:after {
+    content: '';
+    @include full-size;
+    @include absolute-position;
+    animation: thunder-bg 6s infinite;
+  }
+}
+
+/* Стили для канвасов */
+canvas {
+  @include full-size;
+  @include absolute-position;
+}
+
+/* Задаем z-index для слоев */
+canvas:nth-child(1) {
+  z-index: 1;
+}
+
+canvas:nth-child(2) {
+  z-index: 2;
+}
+
+canvas:nth-child(3) {
+  z-index: 3;
+}  

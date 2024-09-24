@@ -1,0 +1,27 @@
+.footer {
+    position: fixed;
+    bottom: 0; /* Закрепляет элемент у нижней границы экрана */
+    left: 0;
+    width: 100%; /* Растягивает footer на всю ширину экрана */
+    z-index: 1000; /* Чтобы footer был поверх других элементов */
+    background-color: #333; /* Цвет фона */
+    color: white;
+    padding: 10px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+}
+
+.footer p {
+    color: white;
+    font-size: 1rem;
+}
+
+/* Медиа-запросы для устройств с шириной экрана до 480px */
+@media (max-width: 480px) {
+    .footer p {
+      font-size: 0.9rem;
+    }
+}

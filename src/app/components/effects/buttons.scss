@@ -1,0 +1,49 @@
+$defaultButton: #e0b31d;
+$activeButton: #be793a;
+
+/* default RGB */
+$defaultButtonR: 224;
+$defaultButtonG: 179;
+$defaultButtonB: 29;
+
+.glow-btn {
+  color: white;
+  background-color: transparent;
+  padding: 10px 20px;
+  border: 2px solid $defaultButton;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px rgba($defaultButtonR, $defaultButtonG, $defaultButtonB, 0.8), 
+              0 0 10px rgba($defaultButtonR, $defaultButtonG, $defaultButtonB, 0.5);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 15px;
+    z-index: -1;
+    background: rgba($defaultButtonR, $defaultButtonG, $defaultButtonB, 0.5);
+    opacity: 0.6;
+    filter: blur(8px);
+  }
+
+  &:hover {
+    box-shadow: 0 0 20px rgba($defaultButtonR, $defaultButtonG, $defaultButtonB, 0.8), 
+                0 0 10px rgba($defaultButtonR, $defaultButtonG, $defaultButtonB, 0.5);
+  }
+}
+
+.active-btn {
+  background-color: $activeButton;
+  border-color: $activeButton;
+  color: white;
+  box-shadow: none;
+  transform: scale(0.98);
+  letter-spacing: 1px;
+}

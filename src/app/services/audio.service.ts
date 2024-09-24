@@ -6,9 +6,10 @@ import { Injectable } from '@angular/core';
 export class AudioService {
   private sounds: { [key: string]: HTMLAudioElement } = {};
 
-  playSound(name: string, path: string, loop: boolean = false) {
+  playSound(name: string, path: string, volume: number,  loop: boolean = false) {
     if (!this.sounds[name]) {
       this.sounds[name] = new Audio(path);
+      this.sounds[name].volume = volume / 100;
       this.sounds[name].loop = loop;
       this.sounds[name].play();
     } else {
@@ -19,6 +20,7 @@ export class AudioService {
   pauseSound(name: string) {
     if (this.sounds[name]) {
       this.sounds[name].pause();
+      this.sounds[name].currentTime = 0;
     }
   }
 

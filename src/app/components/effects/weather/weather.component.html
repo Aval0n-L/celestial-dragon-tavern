@@ -1,0 +1,52 @@
+
+<div class="effect-group">
+    <div class="slider-container">
+        <h3>Weather</h3>
+        <input
+            type="range"
+            min="0"
+            max="100"
+            [(ngModel)]="weatherIntensity"
+            (input)="updateRainIntensity(weatherIntensity)"
+            [ngClass]="currentIconClass"
+            class="styled-range weather">
+    </div>    
+    <div class="buttons">
+        <button 
+            *ngFor="let weather of weatherKeys; let i = index"
+            (click)="toggleWeather(weather)"
+            [ngClass]="{
+                'active-btn': activeWeather === weather, 
+                'glow-btn': activeWeather !== weather
+                }"> <!-- 'lock': isLocked -->
+            {{ weather }}
+        </button>
+        <div *ngIf="isFog()" class="fog-container">
+            <app-fog [fogIntensity]="weatherIntensity"></app-fog>
+        </div>
+        <div *ngIf="isRain()" class="rain-container">
+            <app-rain [rainIntensity]="weatherIntensity"></app-rain>
+        </div>
+        <div *ngIf="isThunderstorm()" class="thunderstorm-container">
+            <app-thunderstorm [weatherIntensity]="weatherIntensity"></app-thunderstorm>
+        </div>
+        <div *ngIf="isSnowfall()">
+            <app-snowfall [snowIntensity]="weatherIntensity"></app-snowfall>
+        </div>
+        <div *ngIf="isBlizzard()">
+            <app-blizzard [blizzardIntensity]="weatherIntensity"></app-blizzard>
+        </div>
+    </div>
+    <!-- <div class="buttons">
+        <button (click)="toggleWeather('Clear Sky')" class="clear">Clear Sky</button>
+        <button (click)="toggleWeather('Overcast')" class="overcast">Overcast</button>
+        <button (click)="toggleWeather('Heatwave')">Heatwave</button>
+        <button (click)="toggleWeather('Dust Storm')">Dust Storm</button>
+        <button (click)="toggleWeather('Tropical Storm')">Tropical Storm</button>
+        <button (click)="toggleWeather('Ethereal Storm')">Ethereal Storm</button>
+        <button (click)="toggleWeather('Acid Rain')">Acid Rain</button>
+        <button (click)="toggleWeather('Lightning Storm')">Lightning Storm</button>
+        <button (click)="toggleWeather('Purple Rain')">Purple Rain</button>
+        <button (click)="toggleWeather('Meteor Shower')">Meteor Shower</button>
+    </div> -->
+</div>
