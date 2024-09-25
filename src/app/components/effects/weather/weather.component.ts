@@ -8,46 +8,55 @@ import { RainComponent } from "./rain/rain.component";
 import { SnowfallComponent } from "./snowfall/snowfall.component";
 import { BlizzardComponent } from './blizzard/blizzard.component';
 import { FogComponent } from "./fog/fog.component";
+import { ClearSkyComponent } from './clear-sky/clear-sky.component';
+import { SandStormComponent } from "./sand-storm/sand-storm.component";
+import { TropicalStormComponent } from "./tropical-storm/tropical-storm.component";
+import { EtherealStormComponent } from "./ethereal-storm/ethereal-storm.component";
 
 @Component({
   selector: 'app-weather',
   standalone: true,
   imports: [
     FormsModule, NgClass, NgFor, NgIf, NgStyle,
-    ThunderstormComponent, RainComponent,
+    ThunderstormComponent, SandStormComponent,
+    TropicalStormComponent, EtherealStormComponent,
+    RainComponent,
     SnowfallComponent, BlizzardComponent,
-    FogComponent
+    FogComponent, ClearSkyComponent
 ],
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.scss'
 })
 export class WeatherComponent implements OnInit {
   public weatherIntensity: number = 15;
-  public isActive = false;
-  public isPlay: boolean = false;
+  public weatherColor: string = `255, 255, 255`;
 
-  weatherArray: { [key in Weather]?: string } = {};
-  weatherKeys: Weather[] = [];
-  activeWeather: Weather | null = null;
+  public isActive = false;
+  public isPlay: boolean = false;  
+
+  private weatherArray: { [key in Weather]?: { path: string, color: string } } = {};
+  public weatherKeys: Weather[] = [];
+  public activeWeather: Weather | null = null;
 
   constructor(private audioService: AudioService) {}
-  
-  ngOnInit() {    
+
+  ngOnInit() {
     this.weatherArray = {
-      [Weather.ClearSky]: '/audio/weather/clear_sky.mp3',
-      [Weather.Fog]: '/audio/weather/fog.mp3',
-      [Weather.Windy]: '/audio/weather/windy.mp3',
+      [Weather.ClearSky]: { path: '/audio/weather/clear_sky.mp3', color: '' },
+      [Weather.Fog]: { path: '/audio/weather/fog.mp3', color: '' },
+      [Weather.Windy]: { path: '/audio/weather/windy.mp3', color: '' },
 
-      [Weather.AcidRain]: '/audio/weather/rain.mp3',
-      [Weather.PurpleRain]: '/audio/weather/rain.mp3',
-      [Weather.Rain]: '/audio/weather/rain.mp3',
+      [Weather.Rain]: { path: '/audio/weather/rain.mp3', color: '255, 255, 255' },
+      [Weather.AcidRain]: { path: '/audio/weather/rain.mp3', color: '0, 255, 0' },
+      [Weather.PurpleRain]: { path: '/audio/weather/rain.mp3', color: '186, 85, 211' },
 
-      [Weather.Thunderstorm]: '/audio/weather/thunderstorm.mp3',
-      [Weather.SandStorm]: '/audio/weather/sandstorm.mp3',
-      [Weather.TropicalStorm]: '/audio/weather/tropicalstorm.mp3',
+      [Weather.Thunderstorm]: { path: '/audio/weather/thunderstorm.mp3', color: '' },
+      [Weather.TropicalStorm]: { path: '/audio/weather/tropicalstorm.mp3', color: '' },
+      [Weather.SandStorm]: { path: '/audio/weather/sandstorm.mp3', color: '' },
+      //[Weather.EtherealStorm]: { path: '/audio/weather/sandstorm.mp3', color: '' },
 
-      [Weather.Snowfall]: '/audio/weather/snowfall.mp3',
-      [Weather.Blizzard]: '/audio/weather/blizzard.mp3',
+      [Weather.Snowfall]: { path: '/audio/weather/snowfall.mp3', color: '' },
+      [Weather.Blizzard]: { path: '/audio/weather/blizzard.mp3', color: '' }
     };
     
     this.weatherKeys = Object.keys(this.weatherArray) as Weather[];
@@ -70,16 +79,22 @@ export class WeatherComponent implements OnInit {
     
     this.weatherIntensity = newIntensity;
     if (this.activeWeather) {
-      this.audioService.setVolume(this.activeWeather, newIntensity);
+      this.audioService.setVolume(this.activeWeather, this.adjustedIntensity(newIntensity));
     }
   }
   //#endregion
 
+  private adjustedIntensity(newIntensity: number): number {
+    if (this.isClearSky()) return 100 - newIntensity;
+
+    return newIntensity;
+  }
+
   // Логика переключения погоды
   toggleWeather(weather: Weather) {
-    const path = this.weatherArray[weather];
+    const config = this.weatherArray[weather];
 
-    if (path) {
+    if (config ) {
       if (this.isPlay && this.isActive && this.activeWeather === weather) {
         console.log(`Unactive weather: ${weather}`);
         
@@ -88,6 +103,7 @@ export class WeatherComponent implements OnInit {
 
         this.isActive = false;
         this.activeWeather = null;
+        this.weatherColor = '';
       } else {
         if (this.activeWeather) {
           console.log(`Switch weather from ${this.activeWeather} to ${weather}`);
@@ -96,9 +112,10 @@ export class WeatherComponent implements OnInit {
         
         console.log(`Toggling weather: ${weather}`);
 
-        this.audioService.playSound(weather, path, this.weatherIntensity, true); // Воспроизводим песню
+        this.audioService.playSound(weather, config.path, this.adjustedIntensity(this.weatherIntensity), true);
         this.isPlay = true;
         this.isActive = true;
+        this.weatherColor = config.color;
         this.activeWeather = weather;
       }
     } else {
@@ -109,12 +126,34 @@ export class WeatherComponent implements OnInit {
   isFog(): boolean {
     return this.activeWeather === Weather.Fog;
   }
+
   isRain(): boolean {
-    return this.activeWeather === Weather.Rain;
+    return this.activeWeather === Weather.Rain || 
+            this.activeWeather === Weather.AcidRain ||
+            this.activeWeather === Weather.PurpleRain ;
   }
+
+  isClearSky(): boolean {
+    return this.activeWeather === Weather.ClearSky;
+  }
+
   isThunderstorm(): boolean {
     return this.activeWeather === Weather.Thunderstorm;
   }
+
+  isSandstorm(): boolean {
+    return this.activeWeather === Weather.SandStorm;
+  }
+
+  isTropicalstorm(): boolean {
+    return this.activeWeather === Weather.TropicalStorm;
+  }
+
+  isEtherealStorm(): boolean {
+    return this.activeWeather === Weather.EtherealStorm;
+  }
+
+
   isSnowfall(): boolean {
     return this.activeWeather === Weather.Snowfall;
   }

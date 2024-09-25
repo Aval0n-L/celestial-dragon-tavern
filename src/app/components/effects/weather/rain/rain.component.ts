@@ -6,6 +6,7 @@ import {
    Input, 
    OnInit, 
    ViewChild } from '@angular/core';
+import { Weather } from '../../../../models/weather.model';
 
 @Component({
   selector: 'app-rain',
@@ -21,6 +22,8 @@ export class RainComponent implements OnInit, AfterViewInit {
   private ctxRain!: CanvasRenderingContext2D;
   private canvasWidth!: number;
   private canvasHeight!: number;
+
+  @Input() rainColor: string = `255, 255, 255`;
 
   @Input()
   set rainIntensity(intensity: number) {
@@ -105,7 +108,7 @@ export class RainComponent implements OnInit, AfterViewInit {
       this.ctxRain.beginPath();
       this.ctxRain.moveTo(drop.x, drop.y);
       this.ctxRain.lineTo(drop.x, drop.y + drop.length);
-      this.ctxRain.strokeStyle = `rgba(255, 255, 255, ${drop.opacity})`;
+      this.ctxRain.strokeStyle = `rgba(${this.rainColor}, ${drop.opacity})`;
       this.ctxRain.lineWidth = 1;
       this.ctxRain.stroke();
 

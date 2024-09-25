@@ -5,31 +5,29 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Input, HostLis
   standalone: true,
   imports: [],
   templateUrl: './clear-sky.component.html',
-  styleUrl: './clear-sky.component.css'
+  styleUrl: './clear-sky.component.scss'
 })
 export class ClearSkyComponent implements OnInit, AfterViewInit {
-  @ViewChild('canvasFog', { static: true }) canvasFogRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvasClearSky', { static: true }) canvasClearSkyRef!: ElementRef<HTMLCanvasElement>;
 
-  private ctxFog!: CanvasRenderingContext2D;
+  private ctxClearSky!: CanvasRenderingContext2D;
   private canvasWidth!: number;
   private canvasHeight!: number;
 
-  // Приватное поле для хранения значения интенсивности тумана
-  private _fogIntensity: number = 15;
+  private _cloudIntensity: number = 0; // От 0 (ясно) до 100 (полностью облачно)
 
   @Input()
-  set fogIntensity(intensity: number) {
-    this._fogIntensity = intensity;
-    this.updateFogSettings(); // Обновляем туман при изменении интенсивности
+  set cloudIntensity(intensity: number) {
+    this._cloudIntensity = intensity;
+    this.updateSkySettings(); // Обновляем настройки при изменении интенсивности облаков
   }
 
-  get fogIntensity(): number {
-    return this._fogIntensity;
+  get cloudIntensity(): number {
+    return this._cloudIntensity;
   }
 
-  // Слои тумана
-  private fogLayers: FogLayer[] = [];
-  private maxFogLayers = 3; // Три слоя тумана
+  private sunRays: SunRay[] = [];
+  private maxSunRays = 10; // Максимальное количество солнечных бликов
 
   constructor() {}
 
@@ -37,129 +35,139 @@ export class ClearSkyComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initializeCanvas();
-    this.createFogLayers();
+    this.createSunRays();
     this.startAnimationLoop();
   }
 
   @HostListener('window:resize')
   onWindowResize(): void {
     this.updateCanvasSize();
-    this.createFogLayers(); // Пересоздаем слои тумана при изменении размера окна
+    this.createSunRays();
   }
 
-  // Инициализация canvas
   private initializeCanvas(): void {
-    this.ctxFog = this.canvasFogRef.nativeElement.getContext('2d')!;
+    this.ctxClearSky = this.canvasClearSkyRef.nativeElement.getContext('2d')!;
     this.updateCanvasSize();
   }
 
   private updateCanvasSize(): void {
-    this.canvasWidth = this.canvasFogRef.nativeElement.width = window.innerWidth;
-    this.canvasHeight = this.canvasFogRef.nativeElement.height = window.innerHeight;
+    this.canvasWidth = this.canvasClearSkyRef.nativeElement.width = window.innerWidth;
+    this.canvasHeight = this.canvasClearSkyRef.nativeElement.height = window.innerHeight;
   }
 
-  // Создание слоев тумана
-  private createFogLayers(): void {
-    this.fogLayers = [];
-    for (let i = 0; i < this.maxFogLayers; i++) {
-      this.fogLayers.push({
-        opacity: this.calculateLayerOpacity(i),
-        speedX: this.calculateLayerSpeed(i),
-        circles: this.generateFogCircles(), // Генерация кругов для тумана
-        xPosition: 0,
-        yPosition: 0
-      });
+  private createSunRays(): void {
+    this.sunRays = [];
+    const sunRayCount = this.calculateSunRayCount();
+
+    for (let i = 0; i < sunRayCount; i++) {
+      this.sunRays.push(this.createRandomSunRay());
     }
   }
 
-  // Метод для обновления настроек тумана при изменении интенсивности
-  private updateFogSettings(): void {
-    if (!this.fogLayers || this.fogLayers.length === 0) {
-      return;
-    }
-    for (let i = 0; i < this.maxFogLayers; i++) {
-      this.fogLayers[i].opacity = this.calculateLayerOpacity(i);
-      this.fogLayers[i].speedX = this.calculateLayerSpeed(i);
-    }
+  private updateSkySettings(): void {
+    this.createSunRays(); // Пересоздаем блики при изменении интенсивности облаков
   }
 
-  // Вычисляем непрозрачность для каждого слоя в зависимости от интенсивности тумана
-  private calculateLayerOpacity(layerIndex: number): number {
-    return 0.1 + (this._fogIntensity / 100) * (0.5 - 0.1); // Изменяем прозрачность от 0.1 до 0.5
+  private calculateSunRayCount(): number {
+    const normalizedIntensity = 100 - this._cloudIntensity; // Инвертируем интенсивность
+    return Math.floor((this.maxSunRays * normalizedIntensity) / 100);
   }
 
-  // Вычисляем скорость для каждого слоя в зависимости от интенсивности тумана
-  private calculateLayerSpeed(layerIndex: number): number {
-    const baseSpeed = 0.3 + (layerIndex * 0.2);
-    return baseSpeed * (this._fogIntensity / 100); // Чем выше интенсивность, тем быстрее движение
+  private createRandomSunRay(): SunRay {
+    const radius = Math.random() * 50 + 50; // Радиус от 50 до 100
+    const angle = Math.random() * Math.PI * 2; // Случайный угол для направления движения
+    const speed = Math.random() * 0.5 + 0.2; // Скорость от 0.2 до 0.7
+
+    return {
+      x: Math.random() * this.canvasWidth,
+      y: Math.random() * this.canvasHeight,
+      radius: radius,
+      opacity: 0, // Начинаем с нулевой прозрачности
+      maxOpacity: Math.random() * 0.5 + 0.5, // Максимальная прозрачность от 0.5 до 1
+      fadeInRate: Math.random() * 0.01 + 0.005, // Скорость появления
+      fadeOutRate: Math.random() * 0.005 + 0.0025, // Скорость исчезновения
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      lifeTime: 0,
+      maxLifeTime: Math.random() * 500 + 500 // Время жизни от 500 до 1000 кадров
+    };
   }
 
-  // Генерация случайных кругов для слоя тумана
-  private generateFogCircles(): FogCircle[] {
-    const circles: FogCircle[] = [];
-    const numCircles = 100; // Количество кругов на каждом слое
-
-    for (let i = 0; i < numCircles; i++) {
-      circles.push({
-        x: Math.random() * this.canvasWidth,
-        y: Math.random() * this.canvasHeight,
-        radius: Math.random() * 50 + 20, // Радиус круга от 20 до 70
-        opacity: Math.random() * 0.2 + 0.1 // Прозрачность каждого круга
-      });
-    }
-    return circles;
-  }
-
-  // Анимация тумана
   private startAnimationLoop(): void {
     this.animate();
   }
 
   private animate(): void {
     this.clearCanvas();
-    this.drawFogLayers();
+    this.updateAndDrawSunRays();
     requestAnimationFrame(() => this.animate());
   }
 
   private clearCanvas(): void {
-    this.ctxFog.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+    this.ctxClearSky.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
   }
 
-  // Отрисовка слоев тумана
-  private drawFogLayers(): void {
-    for (const layer of this.fogLayers) {
-      this.ctxFog.globalAlpha = layer.opacity;
+  private updateAndDrawSunRays(): void {
+    for (let i = 0; i < this.sunRays.length; i++) {
+      const sunRay = this.sunRays[i];
 
-      // Отрисовываем каждый круг на слое
-      for (const circle of layer.circles) {
-        this.ctxFog.beginPath();
-        this.ctxFog.arc(circle.x + layer.xPosition, circle.y, circle.radius, 0, Math.PI * 2);
-        this.ctxFog.fillStyle = `rgba(255, 255, 255, ${circle.opacity})`;
-        this.ctxFog.fill();
+      // Обновляем позицию
+      sunRay.x += sunRay.vx;
+      sunRay.y += sunRay.vy;
+
+      // Обновляем прозрачность
+      if (sunRay.lifeTime < sunRay.maxLifeTime / 2) {
+        // Появление
+        sunRay.opacity += sunRay.fadeInRate;
+        if (sunRay.opacity > sunRay.maxOpacity) {
+          sunRay.opacity = sunRay.maxOpacity;
+        }
+      } else {
+        // Исчезновение
+        sunRay.opacity -= sunRay.fadeOutRate;
+        if (sunRay.opacity < 0) {
+          sunRay.opacity = 0;
+        }
       }
 
-      // Обновляем горизонтальную позицию слоя с учетом скорости
-      layer.xPosition += layer.speedX;
+      // Увеличиваем время жизни
+      sunRay.lifeTime++;
 
-      // Если слой выходит за пределы экрана, сбрасываем позицию
-      if (layer.xPosition >= this.canvasWidth) {
-        layer.xPosition = 0;
+      // Если блик "умер", заменяем его новым
+      if (sunRay.lifeTime >= sunRay.maxLifeTime || sunRay.opacity <= 0) {
+        this.sunRays[i] = this.createRandomSunRay();
+        continue;
       }
+
+      // Рисуем блик
+      this.ctxClearSky.beginPath();
+      this.ctxClearSky.arc(sunRay.x, sunRay.y, sunRay.radius, 0, Math.PI * 2);
+      const gradient = this.ctxClearSky.createRadialGradient(
+        sunRay.x,
+        sunRay.y,
+        0,
+        sunRay.x,
+        sunRay.y,
+        sunRay.radius
+      );
+      gradient.addColorStop(0, `rgba(255, 255, 224, ${sunRay.opacity})`);
+      gradient.addColorStop(1, `rgba(255, 255, 224, 0)`);
+      this.ctxClearSky.fillStyle = gradient;
+      this.ctxClearSky.fill();
     }
   }
 }
 
-interface FogLayer {
-  opacity: number;
-  speedX: number;
-  circles: FogCircle[];
-  xPosition: number;
-  yPosition: number;
-}
-
-interface FogCircle {
+interface SunRay {
   x: number;
   y: number;
   radius: number;
   opacity: number;
+  maxOpacity: number;
+  fadeInRate: number;
+  fadeOutRate: number;
+  vx: number; // Скорость по оси X
+  vy: number; // Скорость по оси Y
+  lifeTime: number;
+  maxLifeTime: number;
 }

@@ -21,15 +21,32 @@
                 }"> <!-- 'lock': isLocked -->
             {{ weather }}
         </button>
+        <div *ngIf="isClearSky()" class="clear-sky-container">
+            <app-clear-sky [cloudIntensity]="weatherIntensity"></app-clear-sky>
+        </div>
         <div *ngIf="isFog()" class="fog-container">
             <app-fog [fogIntensity]="weatherIntensity"></app-fog>
         </div>
         <div *ngIf="isRain()" class="rain-container">
-            <app-rain [rainIntensity]="weatherIntensity"></app-rain>
+            <app-rain 
+                [rainIntensity]="weatherIntensity"
+                [rainColor]="weatherColor">
+            </app-rain>
         </div>
         <div *ngIf="isThunderstorm()" class="thunderstorm-container">
             <app-thunderstorm [weatherIntensity]="weatherIntensity"></app-thunderstorm>
         </div>
+        <div *ngIf="isTropicalstorm()">
+            <app-tropical-storm [tropicalStormIntensity]="weatherIntensity"></app-tropical-storm>
+        </div>
+        <div *ngIf="isSandstorm()">
+            <app-sand-storm [sandStormIntensity]="weatherIntensity"></app-sand-storm>
+        </div>
+        <!-- <div *ngIf="isEtherealStorm()">
+            <app-ethereal-storm [etherealStormIntensity]="weatherIntensity" ></app-ethereal-storm>
+        </div> -->
+
+
         <div *ngIf="isSnowfall()">
             <app-snowfall [snowIntensity]="weatherIntensity"></app-snowfall>
         </div>
