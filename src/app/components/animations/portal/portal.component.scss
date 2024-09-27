@@ -1,0 +1,116 @@
+// Define root CSS variables for dynamic properties
+:root {
+--deg: 1;        // Degree of rotation (unused in this code)
+--x: -50%;       // Default X translation
+--y: -50%;       // Default Y translation
+--speed: 5s;  // Base animation speed
+}
+
+// Styles for the portal elements
+.portal {
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translate(var(--x, -50%), var(--y, -50%)) rotate(0deg);
+    transform-origin: -var(--y) -var(--x);
+    font-size: 20vmin;
+    width: 0.9em;
+    height: 0.9em;
+    border-radius: 90% 95% 85% 105%;
+
+    // Gradient background from white to pink to purple
+    //background: #680068;
+    background: purple;
+
+    mix-blend-mode: screen;
+    filter: hue-rotate(0deg);
+    animation: wobble var(--speed) linear infinite;
+
+    box-shadow:
+        0 0 .5em .2em #3d004d inset, // Inner shadow for depth
+        0 0 0.15em 0 #db4dff;        // Outer glow effect
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Optional content inside the portal
+    &::after {
+        font-size: 1em;
+        white-space: nowrap;
+    }
+
+    /* Individual variations for each portal instance */
+    &:nth-child(1) {
+        --x: -53%; 
+        --y: -53%;
+        --speed: 7s; /* Уникальная скорость для каждого элемента */
+    }
+    &:nth-child(2) {
+        --x: -47%;
+        --y: -52%;
+        --speed: 10s;
+    }
+    &:nth-child(3) {
+        --x: -45%;
+        --y: -50%;
+        --speed: 6s;
+    }
+    &:nth-child(4) {
+        --x: -53%;
+        --y: -45%;
+        --speed: 12s;
+    }
+    &:nth-child(5) {
+        --x: -55%;
+        --y: -45%;
+        --speed: 9s;
+    }
+    &:nth-child(6) {
+        --x: -57%;
+        --y: -45%;
+        --speed: 8s;
+    }
+}
+
+// Animation keyframes for the wobble effect
+@keyframes wobble {
+    to {
+        filter: hue-rotate(360deg); // Complete hue rotation over the animation
+        transform: translate(var(--x), var(--y)) rotate(360deg); // Full rotation
+    }
+}
+
+/* Медиа-запросы для экрана менее 1624px */
+@media (max-width: 1724px) {
+    .portal {
+        top: 47%;
+        width: .8em;
+        height: .8em;
+    }
+}
+
+/* Медиа-запросы для экрана менее 1024px */
+@media (max-width: 1024px) {
+    .portal {
+        width: .9em;
+        height: .9em;
+    }
+}
+
+/* Медиа-запрос для экранов до 768px */
+@media (max-width: 768px) {
+    .portal {
+        top: 48%;
+        width: .9em;
+        height: .9em;
+    }
+}
+
+/* Медиа-запрос для экранов до 480px */
+@media (max-width: 480px) {
+    .portal {
+        width: 1.3em;
+        height: 1.3em;
+    }
+}

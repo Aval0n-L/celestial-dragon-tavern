@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { SongsComponent } from "./songs/songs.component";
 import { WeatherComponent } from './weather/weather.component';
+import { AmbienceComponent } from "./ambience/ambience.component";
 
 @Component({
   selector: 'app-effects',
   standalone: true,
-  imports: [SongsComponent, WeatherComponent],
+  imports: [SongsComponent, WeatherComponent, AmbienceComponent],
   templateUrl: './effects.component.html',
   styleUrl: './effects.component.scss'
 })
@@ -19,13 +20,6 @@ export class EffectsComponent implements OnInit{
   setTime(time: string) {
     // Логика установки времени суток
     console.log(`Setting time to: ${time}`);
-  }
-  //#endregion
-
-  //#region Ambience
-  toggleAmbience(ambience: string) {
-    // Логика переключения атмосферы
-    console.log(`Toggling ambience: ${ambience}`);
   }
   //#endregion
 

@@ -7,11 +7,14 @@
   <div class="location">
       <button class="location-name-button" (click)="navigateToLocations()">{{ locationName }}</button>
   </div>
+  <div>
+    <app-portal (click)="toggleMainContent()"></app-portal>
+  </div>
 </div>
 <!--==============-->
 
 <!--=====MAIN=====-->
-<div class="main-content">
+<div class="main-content" *ngIf="isMainContentVisible">
   <router-outlet></router-outlet>
 </div>
 <!--==============-->

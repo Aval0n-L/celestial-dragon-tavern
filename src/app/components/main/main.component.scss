@@ -19,6 +19,16 @@
   margin-top: 1rem;
 }
 
+.portal-button {
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  background-color: #e0b31d;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
 .location-name-button {
   font-size: 1.5rem;
   color: white;
@@ -39,15 +49,22 @@
     gap: 20px;
     padding: 20px;
     background: rgba(0, 0, 0, 0.8);
-
-    margin: 150px 60px;
-    /*margin-top: 200px;  Отступ от закрепленного header */
-    /*margin-bottom: 200px;  Отступ перед закрепленным footer */
+    width: 80%;
+    margin: 200px auto;
 }
 
+/* Медиа-запрос для экранов до 1248px */
+@media (max-width: 1248px) {
+  .main-content {
+    flex-direction: column;
+    font-size: 1rem;
+  }
+}
 /* Медиа-запрос для экранов до 1024px */
 @media (max-width: 1024px) {
     .main-content {
       flex-direction: column;
+      font-size: 1.2rem;
+      width: 90%;
     }
 }

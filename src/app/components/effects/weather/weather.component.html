@@ -5,7 +5,7 @@
         <input
             type="range"
             min="0"
-            max="100"
+            max="75"
             [(ngModel)]="weatherIntensity"
             (input)="updateRainIntensity(weatherIntensity)"
             [ngClass]="currentIconClass"
@@ -26,6 +26,9 @@
         </div>
         <div *ngIf="isFog()" class="fog-container">
             <app-fog [fogIntensity]="weatherIntensity"></app-fog>
+        </div>
+        <div *ngIf="isWindy()" class="fog-container">
+            <app-windy [windIntensity]="weatherIntensity"></app-windy>
         </div>
         <div *ngIf="isRain()" class="rain-container">
             <app-rain 

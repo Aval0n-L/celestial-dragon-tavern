@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Weather } from '../../../models/weather.model';
 import { ThunderstormComponent } from "./thunderstorm/thunderstorm.component";
@@ -12,6 +12,7 @@ import { ClearSkyComponent } from './clear-sky/clear-sky.component';
 import { SandStormComponent } from "./sand-storm/sand-storm.component";
 import { TropicalStormComponent } from "./tropical-storm/tropical-storm.component";
 import { EtherealStormComponent } from "./ethereal-storm/ethereal-storm.component";
+import { WindyComponent } from "./windy/windy.component";
 
 @Component({
   selector: 'app-weather',
@@ -22,12 +23,13 @@ import { EtherealStormComponent } from "./ethereal-storm/ethereal-storm.componen
     TropicalStormComponent, EtherealStormComponent,
     RainComponent,
     SnowfallComponent, BlizzardComponent,
-    FogComponent, ClearSkyComponent
+    FogComponent, ClearSkyComponent,
+    WindyComponent
 ],
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.scss'
 })
-export class WeatherComponent implements OnInit {
+export class WeatherComponent implements OnInit, OnDestroy {
   public weatherIntensity: number = 15;
   public weatherColor: string = `255, 255, 255`;
 
@@ -60,6 +62,10 @@ export class WeatherComponent implements OnInit {
     };
     
     this.weatherKeys = Object.keys(this.weatherArray) as Weather[];
+  }
+  
+  ngOnDestroy() {
+    this.audioService.pauseAllSounds();
   }
 
   //#region slider
@@ -125,6 +131,10 @@ export class WeatherComponent implements OnInit {
 
   isFog(): boolean {
     return this.activeWeather === Weather.Fog;
+  }
+
+  isWindy(): boolean {
+    return this.activeWeather === Weather.Windy;
   }
 
   isRain(): boolean {

@@ -12,7 +12,7 @@ import { AudioService } from '../../../services/audio.service';
   styleUrl: './songs.component.scss'
 })
 export class SongsComponent implements OnInit {
-  songVolume: number = 50;
+  songVolume: number = 75;
   isPlay: boolean = false;
   
   songs: { [key in Songs]?: string } = {};

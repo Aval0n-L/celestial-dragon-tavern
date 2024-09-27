@@ -29,4 +29,10 @@ export class AudioService {
       this.sounds[name].volume = volume / 100;
     }
   }
+  
+  pauseAllSounds() {
+    for (let key in this.sounds) {
+      this.pauseSound(key);
+    }
+  }
 }
