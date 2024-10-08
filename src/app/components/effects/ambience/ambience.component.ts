@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AmbienceComponent {
   toggleAmbience(ambience: string) {
-    // Логика управления звуками атмосферы
+    // Atmospheric Sound Control Logic
     console.log(`Toggling ambience: ${ambience}`);
   }
 }

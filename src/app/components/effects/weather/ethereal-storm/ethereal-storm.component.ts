@@ -24,12 +24,12 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
   private canvasWidth!: number;
   private canvasHeight!: number;
 
-  private _etherealStormIntensity: number = 50; // Интенсивность бури от 0 до 100
+  private _etherealStormIntensity: number = 50;
 
   @Input()
   set etherealStormIntensity(intensity: number) {
     this._etherealStormIntensity = intensity;
-    this.updateStormSettings(); // Обновляем настройки при изменении интенсивности
+    this.updateStormSettings();
   }
 
   get etherealStormIntensity(): number {
@@ -37,8 +37,8 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private rifts: Rift[] = [];
-  private maxRifts = 5; // Максимальное количество разрывов
-  private riftImages: HTMLImageElement[] = []; // Массив с изображениями разрывов
+  private maxRifts = 5;
+  private riftImages: HTMLImageElement[] = []; // Array of gap images
 
   private animationFrameId: number | null = null;
 
@@ -77,7 +77,6 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private loadRiftImages(): void {
-    // Загрузите изображения разрывов
     const riftImageUrls = [
       'assets/images/rift1.png',
       'assets/images/rift2.png',
@@ -112,13 +111,13 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
       rotation: Math.random() * 360,
       rotationSpeed: (Math.random() * 0.5 - 0.25),
       lifeTime: 0,
-      maxLifeTime: Math.random() * 500 + 500, // Жизнь от 500 до 1000 кадров
+      maxLifeTime: Math.random() * 500 + 500, // Life from 500 to 1000 frames
     };
   }
 
   private updateStormSettings(): void {
     this.createRifts();
-    // Обновите другие элементы бури, если необходимо
+    // Update other storm elements if needed
   }
 
   private startAnimationLoop(): void {
@@ -130,7 +129,7 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
     this.drawRifts();
     this.drawLightnings();
     this.drawCreatures();
-    // Добавьте вызовы методов для других элементов (молнии, существа)
+    // Add method calls for other elements (lightning, creatures)
     this.animationFrameId = requestAnimationFrame(this.animate);
   };
 
@@ -142,18 +141,18 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
     for (let i = this.rifts.length - 1; i >= 0; i--) {
       const rift = this.rifts[i];
 
-      // Обновляем параметры разрыва
+      // Updating the break parameters
       rift.lifeTime++;
       rift.opacity = Math.sin((Math.PI * rift.lifeTime) / rift.maxLifeTime);
       rift.rotation += rift.rotationSpeed;
 
       if (rift.lifeTime >= rift.maxLifeTime) {
-        // Удаляем разрыв, если он достиг конца жизни
+        // Remove the gap if it has reached the end of life
         this.rifts.splice(i, 1);
         continue;
       }
 
-      // Рисуем разрыв
+      // Draw rifts
       const img = this.riftImages[i % this.riftImages.length];
 
       this.ctx.save();
@@ -172,11 +171,11 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private lightnings: EtherealLightning[] = [];
-  private lightningFrequency = 0.02; // Вероятность появления молнии каждый кадр
+  private lightningFrequency = 0.02; // Probability of lightning every frame
 
-  // Метод для создания и отрисовки молний
+  // Method for creating and drawing lightning
   private drawLightnings(): void {
-    // С вероятностью lightningFrequency создаем новую молнию
+    // With probability lightningFrequency create new lightning
     if (Math.random() < this.lightningFrequency * (this._etherealStormIntensity / 100)) {
       this.lightnings.push(this.createRandomLightning());
     }
@@ -184,7 +183,7 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
     for (let i = this.lightnings.length - 1; i >= 0; i--) {
       const lightning = this.lightnings[i];
 
-      // Рисуем молнию
+      // Draw lightning
       this.ctx.save();
       this.ctx.globalAlpha = lightning.opacity;
       this.ctx.strokeStyle = lightning.color;
@@ -195,7 +194,7 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
       this.ctx.stroke();
       this.ctx.restore();
 
-      // Обновляем параметры молнии
+      // Updating lightning parameters
       lightning.lifeTime++;
       lightning.opacity -= 0.02;
 
@@ -206,7 +205,7 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private createRandomLightning(): EtherealLightning {
-    const colors = ['#00FFFF', '#8A2BE2', '#7FFFD4']; // Бирюзовый, фиолетовый, аквамарин
+    const colors = ['#00FFFF', '#8A2BE2', '#7FFFD4'];
     const color = colors[Math.floor(Math.random() * colors.length)];
 
     return {
@@ -216,14 +215,13 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
       opacity: 1,
       color: color,
       lifeTime: 0,
-      maxLifeTime: Math.random() * 10 + 10, // Жизнь от 10 до 20 кадров
+      maxLifeTime: Math.random() * 10 + 10, // Life from 10 to 20 frames
     };
   } 
 
   private creatures: EtherealCreature[] = [];
-  private maxCreatures = 3; // Максимальное количество существ
-  private creatureImages: HTMLImageElement[] = []; // Массив с изображениями существ
-  // В ngOnInit загрузите изображения существ
+  private maxCreatures = 3; // Maximum number of creatures
+  private creatureImages: HTMLImageElement[] = []; // Array of images of creatures
   private loadCreatureImages(): void {
     const creatureImageUrls = [
       'assets/images/creature1.png',
@@ -237,9 +235,9 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
       this.creatureImages.push(img);
     }
   }
-  // Метод для создания и отрисовки существ
+  // Method for creating and drawing creatures
   private drawCreatures(): void {
-    // С вероятностью создаем новое существо
+    // We create a new creature with probability
     if (this.creatures.length < this.maxCreatures * (this._etherealStormIntensity / 100)) {
       this.creatures.push(this.createRandomCreature());
     }
@@ -247,7 +245,7 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
     for (let i = this.creatures.length - 1; i >= 0; i--) {
       const creature = this.creatures[i];
 
-      // Рисуем существо
+      // Draw a creature
       this.ctx.save();
       this.ctx.globalAlpha = creature.opacity;
       this.ctx.drawImage(
@@ -259,7 +257,7 @@ export class EtherealStormComponent implements OnInit, AfterViewInit, OnDestroy 
       );
       this.ctx.restore();
 
-      // Обновляем параметры существа
+      // Updating creature parameters
       creature.x += creature.speedX;
       creature.y += creature.speedY;
       creature.lifeTime++;

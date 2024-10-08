@@ -16,7 +16,6 @@ export class FogComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _fogIntensity: number = 50;
 
-  // Геттер и сеттер для fogIntensity
   @Input()
   set fogIntensity(intensity: number) {
     this._fogIntensity = intensity;
@@ -65,10 +64,10 @@ export class FogComponent implements OnInit, AfterViewInit, OnDestroy {
   private createFogLayers(): void {
     this.fogLayers = [];
 
-    // Создаём несколько слоёв тумана
+    // Create several layers of fog
     for (let i = 0; i < 2; i++) {
       const fogLayer = new Image();
-      fogLayer.src = '/weather/fog_layer_' + (i + 1) + '.png'; // Замените на фактический путь к вашим изображениям
+      fogLayer.src = '/weather/fog_layer_' + (i + 1) + '.png'; // Replace with the actual path to your images
 
       this.fogLayers.push({
         image: fogLayer,
@@ -76,14 +75,14 @@ export class FogComponent implements OnInit, AfterViewInit, OnDestroy {
         y: 0,
         width: this.canvasWidth,
         height: this.canvasHeight,
-        opacity: (this._fogIntensity / 100) * 0.8, // Разная прозрачность для слоёв
-        speed: 0.2 + i * 0.1, // Разная скорость для слоёв
+        opacity: (this._fogIntensity / 100) * 0.8, // Different transparency for layers
+        speed: 0.2 + i * 0.1, // Different speed for layers
       });
     }
   }
 
   private updateFogSettings(): void {
-    // Обновляем прозрачность каждого слоя на основе fogIntensity
+    // Update the transparency of each layer based on fogIntensity
     for (let i = 0; i < this.fogLayers.length; i++) {
       this.fogLayers[i].opacity = (this._fogIntensity / 100) * 0.8;
     }
@@ -114,10 +113,10 @@ export class FogComponent implements OnInit, AfterViewInit, OnDestroy {
       this.ctxFog.save();
       this.ctxFog.globalAlpha = layer.opacity;
 
-      // Применяем размытие перед отрисовкой
+      // Apply blur before rendering
       this.ctxFog.filter = 'blur(5px)';
 
-      // Рисуем изображение дважды для создания бесшовного эффекта
+      // Draw the image twice to create a seamless effect
       this.ctxFog.drawImage(
         layer.image,
         layer.x,
@@ -137,7 +136,7 @@ export class FogComponent implements OnInit, AfterViewInit, OnDestroy {
       this.ctxFog.restore();
     }
 
-    // Сбрасываем прозрачность
+    // Reset transparency
     this.ctxFog.globalAlpha = 1.0;
   }
 }

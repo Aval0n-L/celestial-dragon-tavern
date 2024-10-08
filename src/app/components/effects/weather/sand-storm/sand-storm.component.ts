@@ -24,12 +24,12 @@ export class SandStormComponent implements OnInit, AfterViewInit, OnDestroy {
   private canvasWidth!: number;
   private canvasHeight!: number;
 
-  private _sandStormIntensity: number = 50; // Интенсивность бури от 0 до 100
+  private _sandStormIntensity: number = 50;
 
   @Input()
   set sandStormIntensity(intensity: number) {
     this._sandStormIntensity = intensity;
-    this.updateSandParticles(); // Обновляем частицы при изменении интенсивности
+    this.updateSandParticles();
   }
 
   get sandStormIntensity(): number {
@@ -37,7 +37,7 @@ export class SandStormComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private sandParticles: SandParticle[] = [];
-  private maxSandParticles = 300; // Максимальное количество частиц
+  private maxSandParticles = 300;
   private animationFrameId: number | null = null;
 
   constructor() {}
@@ -75,7 +75,7 @@ export class SandStormComponent implements OnInit, AfterViewInit, OnDestroy {
   private createSandParticles(): void {
     this.sandParticles = [];
   
-    const layers = 3; // Количество слоев
+    const layers = 3;
     for (let l = 0; l < layers; l++) {
       const layerParticleCount = Math.floor(
         (this.maxSandParticles * this._sandStormIntensity) / 100 / layers
@@ -83,7 +83,7 @@ export class SandStormComponent implements OnInit, AfterViewInit, OnDestroy {
   
       for (let i = 0; i < layerParticleCount; i++) {
         const particle = this.createRandomSandParticle();
-        // Настраиваем параметры для слоя
+        // Setting up the parameters for the layer
         particle.size *= 1 - l * 0.3;
         particle.speedX *= 1 + l * 0.5;
         particle.speedY *= 1 + l * 0.5;
@@ -132,14 +132,14 @@ export class SandStormComponent implements OnInit, AfterViewInit, OnDestroy {
     for (let i = 0; i < this.sandParticles.length; i++) {
       const particle = this.sandParticles[i];
 
-      // Обновляем позицию
+      // Updating the position
       particle.x += particle.speedX;
       particle.y += particle.speedY;
 
-      // Увеличиваем время жизни
+      // Increasing lifespan
       particle.lifeTime++;
 
-      // Если частица "умерла" или вышла за пределы экрана, заменяем её новой
+      // If a particle "dies" or goes beyond the screen, we replace it with a new one
       if (
         particle.lifeTime >= particle.maxLifeTime ||
         particle.x > this.canvasWidth ||
@@ -151,8 +151,8 @@ export class SandStormComponent implements OnInit, AfterViewInit, OnDestroy {
         continue;
       }
 
-      // Рисуем частицу
-      this.ctx.fillStyle = `rgba(210, 180, 140, ${particle.opacity})`; // Цвет песка (тан)
+      // Draw a particle
+      this.ctx.fillStyle = `rgba(210, 180, 140, ${particle.opacity})`; // Sand color (tan)
       this.ctx.beginPath();
       this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       this.ctx.fill();

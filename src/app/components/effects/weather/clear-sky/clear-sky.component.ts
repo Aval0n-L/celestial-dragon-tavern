@@ -14,12 +14,12 @@ export class ClearSkyComponent implements OnInit, AfterViewInit {
   private canvasWidth!: number;
   private canvasHeight!: number;
 
-  private _cloudIntensity: number = 0; // От 0 (ясно) до 100 (полностью облачно)
+  private _cloudIntensity: number = 0;
 
   @Input()
   set cloudIntensity(intensity: number) {
     this._cloudIntensity = intensity;
-    this.updateSkySettings(); // Обновляем настройки при изменении интенсивности облаков
+    this.updateSkySettings(); // Update settings when cloud intensity changes
   }
 
   get cloudIntensity(): number {
@@ -27,7 +27,7 @@ export class ClearSkyComponent implements OnInit, AfterViewInit {
   }
 
   private sunRays: SunRay[] = [];
-  private maxSunRays = 10; // Максимальное количество солнечных бликов
+  private maxSunRays = 10; // Maximum amount of sun glare
 
   constructor() {}
 
@@ -65,31 +65,31 @@ export class ClearSkyComponent implements OnInit, AfterViewInit {
   }
 
   private updateSkySettings(): void {
-    this.createSunRays(); // Пересоздаем блики при изменении интенсивности облаков
+    this.createSunRays(); // Re-creating glare when changing cloud intensity
   }
 
   private calculateSunRayCount(): number {
-    const normalizedIntensity = 100 - this._cloudIntensity; // Инвертируем интенсивность
+    const normalizedIntensity = 100 - this._cloudIntensity; // Invert the intensity
     return Math.floor((this.maxSunRays * normalizedIntensity) / 100);
   }
 
   private createRandomSunRay(): SunRay {
-    const radius = Math.random() * 50 + 50; // Радиус от 50 до 100
-    const angle = Math.random() * Math.PI * 2; // Случайный угол для направления движения
-    const speed = Math.random() * 0.5 + 0.2; // Скорость от 0.2 до 0.7
+    const radius = Math.random() * 50 + 50;
+    const angle = Math.random() * Math.PI * 2; // Random angle for direction of movement
+    const speed = Math.random() * 0.5 + 0.2; // Speed ​​from 0.2 to 0.7
 
     return {
       x: Math.random() * this.canvasWidth,
       y: Math.random() * this.canvasHeight,
       radius: radius,
-      opacity: 0, // Начинаем с нулевой прозрачности
-      maxOpacity: Math.random() * 0.5 + 0.5, // Максимальная прозрачность от 0.5 до 1
+      opacity: 0, // Let's start with zero transparency
+      maxOpacity: Math.random() * 0.5 + 0.5, // Maximum transparency from 0.5 to 1
       fadeInRate: Math.random() * 0.01 + 0.005, // Скорость появления
       fadeOutRate: Math.random() * 0.005 + 0.0025, // Скорость исчезновения
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       lifeTime: 0,
-      maxLifeTime: Math.random() * 500 + 500 // Время жизни от 500 до 1000 кадров
+      maxLifeTime: Math.random() * 500 + 500 // Lifetime from 500 to 1000 frames
     };
   }
 
@@ -115,15 +115,15 @@ export class ClearSkyComponent implements OnInit, AfterViewInit {
       sunRay.x += sunRay.vx;
       sunRay.y += sunRay.vy;
 
-      // Обновляем прозрачность
+      // Updating transparency
       if (sunRay.lifeTime < sunRay.maxLifeTime / 2) {
-        // Появление
+        // Appearance
         sunRay.opacity += sunRay.fadeInRate;
         if (sunRay.opacity > sunRay.maxOpacity) {
           sunRay.opacity = sunRay.maxOpacity;
         }
       } else {
-        // Исчезновение
+        // Disappearance
         sunRay.opacity -= sunRay.fadeOutRate;
         if (sunRay.opacity < 0) {
           sunRay.opacity = 0;
@@ -139,7 +139,7 @@ export class ClearSkyComponent implements OnInit, AfterViewInit {
         continue;
       }
 
-      // Рисуем блик
+      // Draw a glare
       this.ctxClearSky.beginPath();
       this.ctxClearSky.arc(sunRay.x, sunRay.y, sunRay.radius, 0, Math.PI * 2);
       const gradient = this.ctxClearSky.createRadialGradient(
@@ -166,8 +166,8 @@ interface SunRay {
   maxOpacity: number;
   fadeInRate: number;
   fadeOutRate: number;
-  vx: number; // Скорость по оси X
-  vy: number; // Скорость по оси Y
+  vx: number; // X-axis speed
+  vy: number; // Speed ​​along the Y axis
   lifeTime: number;
   maxLifeTime: number;
 }

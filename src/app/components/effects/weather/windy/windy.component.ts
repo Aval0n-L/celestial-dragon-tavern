@@ -24,12 +24,12 @@ export class WindyComponent implements OnInit, AfterViewInit, OnDestroy {
   private canvasWidth!: number;
   private canvasHeight!: number;
 
-  private _windIntensity: number = 50; // Интенсивность ветра от 0 до 100
+  private _windIntensity: number = 50;
 
   @Input()
   set windIntensity(intensity: number) {
     this._windIntensity = intensity;
-    this.updateWindParticles(); // Обновляем частицы при изменении интенсивности
+    this.updateWindParticles();
   }
 
   get windIntensity(): number {
@@ -37,7 +37,7 @@ export class WindyComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private windParticles: WindParticle[] = [];
-  private maxWindParticles = 25; // Максимальное количество частиц
+  private maxWindParticles = 25;
   private animationFrameId: number | null = null;
 
   constructor() {}
@@ -83,7 +83,7 @@ export class WindyComponent implements OnInit, AfterViewInit, OnDestroy {
 
       for (let i = 0; i < layerParticleCount; i++) {
         const particle = this.createRandomWindParticle();
-        // Настраиваем параметры для слоя
+        // Setting up the parameters for the layer
         particle.size *= 1 - l * 0.3;
         particle.speedX *= 1 + l * 0.5;
         particle.speedY *= 1 + l * 0.5;
@@ -132,14 +132,14 @@ export class WindyComponent implements OnInit, AfterViewInit, OnDestroy {
     for (let i = 0; i < this.windParticles.length; i++) {
       const particle = this.windParticles[i];
 
-      // Обновляем позицию
+      // Updating the position
       particle.x += particle.speedX;
       particle.y += particle.speedY;
 
-      // Увеличиваем время жизни
+      // Increasing lifespan
       particle.lifeTime++;
 
-      // Если частица "умерла" или вышла за пределы экрана, заменяем её новой
+      // If a particle "dies" or goes beyond the screen, we replace it with a new one
       if (
         particle.lifeTime >= particle.maxLifeTime ||
         particle.x > this.canvasWidth ||
@@ -151,15 +151,15 @@ export class WindyComponent implements OnInit, AfterViewInit, OnDestroy {
         continue;
       }
 
-      // Рисуем частицу
+      // Draw a particle
       const colors = ['rgba(255, 255, 255, ', 'rgba(200, 200, 255, ', 'rgba(180, 180, 200, '];
       const color = colors[Math.floor(Math.random() * colors.length)];
 
 
-      // Добавляем эффект размытия
+      // Adding a blur effect
       this.ctx.filter = 'blur(0.5px)';
 
-      // Рисуем частицу как небольшую линию
+      // Draw the particle as a small line
       this.ctx.strokeStyle = color + `${particle.opacity})`;
       this.ctx.lineWidth = particle.size;
       this.ctx.beginPath();
@@ -167,7 +167,7 @@ export class WindyComponent implements OnInit, AfterViewInit, OnDestroy {
       this.ctx.lineTo(particle.x - particle.speedX * 5, particle.y - particle.speedY * 5);
       this.ctx.stroke();
 
-      // Отключаем фильтр после отрисовки
+      // Disable filter after rendering
       this.ctx.filter = 'none';
     }
   }

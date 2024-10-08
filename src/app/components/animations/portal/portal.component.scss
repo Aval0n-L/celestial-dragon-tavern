@@ -44,7 +44,7 @@
     &:nth-child(1) {
         --x: -53%; 
         --y: -53%;
-        --speed: 7s; /* Уникальная скорость для каждого элемента */
+        --speed: 7s; /* Unique speed for each element */
     }
     &:nth-child(2) {
         --x: -47%;
@@ -81,7 +81,7 @@
     }
 }
 
-/* Медиа-запросы для экрана менее 1624px */
+/* Media queries for screen less than 1624px */
 @media (max-width: 1724px) {
     .portal {
         top: 47%;
@@ -90,7 +90,7 @@
     }
 }
 
-/* Медиа-запросы для экрана менее 1024px */
+/* Media queries for screens smaller than 1024px */
 @media (max-width: 1024px) {
     .portal {
         width: .9em;
@@ -98,7 +98,7 @@
     }
 }
 
-/* Медиа-запрос для экранов до 768px */
+/* Media query for screens up to 768px */
 @media (max-width: 768px) {
     .portal {
         top: 48%;
@@ -107,7 +107,7 @@
     }
 }
 
-/* Медиа-запрос для экранов до 480px */
+/* Media query for screens up to 480px */
 @media (max-width: 480px) {
     .portal {
         width: 1.3em;

@@ -18,14 +18,14 @@ export class EffectsComponent implements OnInit{
 
   //#region Time
   setTime(time: string) {
-    // Логика установки времени суток
+    // Time of day setting logic
     console.log(`Setting time to: ${time}`);
   }
   //#endregion
 
   //#region Oneshots
   playOneshot(sound: string) {
-    // Логика воспроизведения одиночного звука
+    // Single Sound Playback Logic
     console.log(`Playing oneshot sound: ${sound}`);
   }
   //#endregion

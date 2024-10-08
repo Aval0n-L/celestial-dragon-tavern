@@ -1,10 +1,10 @@
 .footer {
     position: fixed;
-    bottom: 0; /* Закрепляет элемент у нижней границы экрана */
+    bottom: 0; /* Pins the element to the bottom edge of the screen. */
     left: 0;
-    width: 100%; /* Растягивает footer на всю ширину экрана */
-    z-index: 1000; /* Чтобы footer был поверх других элементов */
-    background-color: #333; /* Цвет фона */
+    width: 100%; /* Stretches the footer to the full width of the screen */
+    z-index: 1000; /* To keep the footer on top of other elements */
+    background-color: #333; /* Background color */
     color: white;
     padding: 10px 20px;
 
@@ -19,7 +19,7 @@
     font-size: 1rem;
 }
 
-/* Медиа-запросы для устройств с шириной экрана до 480px */
+/* Media queries for devices with screen width up to 480px */
 @media (max-width: 480px) {
     .footer p {
       font-size: 0.9rem;

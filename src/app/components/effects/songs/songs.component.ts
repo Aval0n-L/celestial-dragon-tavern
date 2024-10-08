@@ -44,10 +44,10 @@ export class SongsComponent implements OnInit {
         this.activeSong = null; 
       } else {
         if (this.activeSong) {
-          this.audioService.pauseSound(this.activeSong); // Остановим предыдущую песню, если она была
+          this.audioService.pauseSound(this.activeSong); // Let's stop the previous song if there was one
         }
 
-        this.audioService.playSound(song, path, this.songVolume, true); // Воспроизводим песню
+        this.audioService.playSound(song, path, this.songVolume, true);
         this.isPlay = true;
         this.activeSong = song;
       }

@@ -6,10 +6,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LocationService {
 
-  private selectedLocationSource = new BehaviorSubject<any>(null); // Хранит текущее состояние
-  selectedLocation$ = this.selectedLocationSource.asObservable();  // Наблюдаемый поток для получения данных
+  private selectedLocationSource = new BehaviorSubject<any>(null); // Stores the current state
+  selectedLocation$ = this.selectedLocationSource.asObservable();  // Observable stream for receiving data
 
-  // Метод для изменения выбранной локации
+  // Method to change the selected location
   changeLocation(location: any) {
     this.selectedLocationSource.next(location);
   }

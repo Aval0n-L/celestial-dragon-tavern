@@ -96,7 +96,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
     return newIntensity;
   }
 
-  // Логика переключения погоды
+  // Weather switching logic
   toggleWeather(weather: Weather) {
     const config = this.weatherArray[weather];
 

@@ -2,7 +2,7 @@
 
 .effects {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Три колонки */
+  grid-template-columns: repeat(2, 1fr); /* Three columns */
   gap: 30px;
   padding: 20px;
   color: white;
@@ -11,46 +11,46 @@
 
 .effect-group {
   display: flex;
-  flex-direction: column; /* Колонка для заголовка, бегунка и кнопок */
-  gap: 20px; /* Отступы между элементами */
+  flex-direction: column; /* Column for header, slider and buttons */
+  gap: 20px; /* Indents between elements */
   width: 100%;
 }
 
 .effect-group h3 {
-  flex-shrink: 0; /* Заголовок занимает только нужное место */
+  flex-shrink: 0; /* The title takes up just the right amount of space */
   font-size: 1.5rem;
   margin: 0;
 }
 
 .slider-container {
   display: flex;
-  align-items: center; /* Центрируем заголовок и бегунок по вертикали */
-  gap: 15px; /* Отступ между заголовком и бегунком */
+  align-items: center; /* Center the title and slider vertically */
+  gap: 15px; /* Space between title and slider */
   width: 100%;
 }
 
 input[type="range"] {
-  flex-grow: 1; /* Позволяет бегунку занимать максимальное пространство */
+  flex-grow: 1; /* Allows the runner to take up maximum space */
   margin-top: 10px;
-  width: 100%; /* Убедимся, что бегунок занимает всю ширину */
+  width: 100%; /* Let's make sure the slider takes up the entire width. */
 }
 
 h3 {
   margin: 0;
   font-size: 1.5rem;
-  white-space: nowrap; /* Не переносить заголовок */
+  white-space: nowrap; /* Don't wrap the title */
 }
 
 .styled-range {
   -webkit-appearance: none;
-  width: 100%; /* Бегунок занимает всю доступную ширину */
+  width: 100%; /* The slider takes up the entire available width. */
   height: 4px;
   border-radius: 5px;
   outline: none;
   transition: background 0.3s;
 }
 
-/* Стили для кнопок */
+/* Styles for buttons */
 .buttons {
   display: flex;
   gap: 10px;
@@ -70,22 +70,22 @@ h3 {
   width: 6rem;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 60%; /* Иконка будет занимать 60% кнопки */
+  background-size: 60%; /* The icon will take up 60% of the button */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end; /* Текст под иконкой */
+  justify-content: flex-end; /* Text under the icon */
   padding-bottom: 5px; /* Отступ для текста под иконкой */
 }
 
-/* Медиа-запросы для экрана менее 1024px */
+/* Indent for text under icon */
 @media (max-width: 1024px) {
   .effects {
-    grid-template-columns: 1fr; /* Одна колонка */
+    grid-template-columns: 1fr; /* One column */
   }
 }
 
-/* Медиа-запрос для экранов до 768px */
+/* Media query for screens up to 768px */
 @media (max-width: 768px) {  
   .effect-group {
       align-items: flex-start;
@@ -96,7 +96,7 @@ h3 {
   }
 }
 
-/* Медиа-запрос для экранов до 480px */
+/* Media query for screens up to 480px */
 @media (max-width: 480px) {
   .effect-group h3 {
       font-size: 1.2rem;
@@ -107,6 +107,6 @@ h3 {
   }
 
   .slider-image {
-      height: 25px; /* Уменьшаем размер изображения для маленьких экранов */
+      height: 25px; /* Reduce image size for small screens */
   }
 }

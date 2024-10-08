@@ -24,12 +24,12 @@ export class TropicalStormComponent implements OnInit, AfterViewInit, OnDestroy 
   private canvasWidth!: number;
   private canvasHeight!: number;
 
-  private _tropicalStormIntensity: number = 15; // Интенсивность шторма от 0 до 100
+  private _tropicalStormIntensity: number = 15;
 
   @Input()
   set tropicalStormIntensity(intensity: number) {
     this._tropicalStormIntensity = intensity;
-    this.updateStormSettings(); // Обновляем настройки при изменении интенсивности
+    this.updateStormSettings();
   }
 
   get tropicalStormIntensity(): number {
@@ -37,7 +37,7 @@ export class TropicalStormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private rainDrops: RainDrop[] = [];
-  private maxRainDrops = 500; // Максимальное количество капель дождя
+  private maxRainDrops = 500;
 
   private animationFrameId: number | null = null;
 
@@ -128,17 +128,17 @@ export class TropicalStormComponent implements OnInit, AfterViewInit, OnDestroy 
       this.ctx.lineTo(drop.x + drop.speedX, drop.y + drop.length);
       this.ctx.stroke();
 
-      // Обновляем положение капли
+      // Update the position of the drop
       drop.x += drop.speedX;
       drop.y += drop.speedY;
 
-      // Если капля выходит за пределы экрана, возвращаем её наверх
+      // If the drop goes beyond the screen, we return it to the top
       if (drop.y > this.canvasHeight) {
         drop.y = -drop.length;
         drop.x = Math.random() * this.canvasWidth;
       }
 
-      // Если капля выходит за горизонтальные границы
+      // If the drop goes beyond the horizontal boundaries
       if (drop.x > this.canvasWidth || drop.x < 0) {
         drop.x = Math.random() * this.canvasWidth;
         drop.y = Math.random() * this.canvasHeight / 2;

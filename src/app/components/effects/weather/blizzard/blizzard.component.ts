@@ -17,16 +17,16 @@ export class BlizzardComponent implements OnInit, AfterViewInit {
   @Input()
   set blizzardIntensity(intensity: number) {
     this._blizzardIntensity = intensity;
-    this.updateSnowflakeDrops(); // Обновляем снежинки при изменении интенсивности
+    this.updateSnowflakeDrops();
   }
 
   get blizzardIntensity(): number {
     return this._blizzardIntensity;
   }
-  @Input() _blizzardIntensity: number = 15; // Интенсивность метели (от 0 до 100)
+  @Input() _blizzardIntensity: number = 15;
 
   private snowflakes: Blizzard[] = [];
-  private maxBlizzard = 500; // Максимальное количество снежинок
+  private maxBlizzard = 500; // Maximum number of snowflakes
   private blizzardCount!: number;
 
   constructor() {}
@@ -42,7 +42,7 @@ export class BlizzardComponent implements OnInit, AfterViewInit {
   @HostListener('window:resize')
   onWindowResize(): void {
     this.updateCanvasSize();
-    this.initializeBlizzard(); // Пересоздаем снежинки при изменении размера окна
+    this.initializeBlizzard(); // Re-create snowflakes when window size changes
   }
 
   // Инициализация canvas
@@ -61,7 +61,7 @@ export class BlizzardComponent implements OnInit, AfterViewInit {
     this.initializeBlizzard();
   }
 
-  // Создаем снежинки на основе интенсивности метели
+  // Create snowflakes based on the intensity of the snowstorm
   private initializeBlizzard(): void {
     this.snowflakes = [];
     for (let i = 0; i < this.blizzardCount; i++) {
@@ -69,8 +69,8 @@ export class BlizzardComponent implements OnInit, AfterViewInit {
         x: Math.random() * this.canvasWidth,
         y: Math.random() * this.canvasHeight,
         radius: Math.random() * 3 + 1,
-        speedY: (Math.random() * 1 + 1) * (this.blizzardIntensity / 10), // Скорость падения
-        speedX: (Math.random() * 2 - 1) * (this.blizzardIntensity / 10), // Ветер (горизонтальное движение)
+        speedY: (Math.random() * 1 + 1) * (this.blizzardIntensity / 10), // Fall speed
+        speedX: (Math.random() * 2 - 1) * (this.blizzardIntensity / 10), // Wind (horizontal movement)
         opacity: Math.random() * 0.5 + 0.3
       });
     }
@@ -91,7 +91,7 @@ export class BlizzardComponent implements OnInit, AfterViewInit {
     this.ctxBlizzard.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
   }
 
-  // Отрисовка снежинок и их движение
+  // Drawing snowflakes and their movement
   private drawSnowflakes(): void {
     for (const snowflake of this.snowflakes) {
       this.ctxBlizzard.beginPath();
@@ -99,9 +99,9 @@ export class BlizzardComponent implements OnInit, AfterViewInit {
       this.ctxBlizzard.fillStyle = `rgba(255, 255, 255, ${snowflake.opacity})`;
       this.ctxBlizzard.fill();
 
-      // Обновляем положение снежинки
+      // Update the position of the snowflake
       snowflake.y += snowflake.speedY;
-      snowflake.x += snowflake.speedX; // Добавляем влияние ветра
+      snowflake.x += snowflake.speedX; // Adding wind influence
 
       // Если снежинка выходит за пределы экрана, возвращаем её наверх
       if (snowflake.y > this.canvasHeight) {
@@ -109,7 +109,7 @@ export class BlizzardComponent implements OnInit, AfterViewInit {
         snowflake.x = Math.random() * this.canvasWidth;
       }
 
-      // Если снежинка выходит за горизонтальные границы экрана
+      // If the snowflake goes beyond the screen, we return it to the top
       if (snowflake.x > this.canvasWidth || snowflake.x < 0) {
         snowflake.x = Math.random() * this.canvasWidth;
         snowflake.y = Math.random() * this.canvasHeight / 2;

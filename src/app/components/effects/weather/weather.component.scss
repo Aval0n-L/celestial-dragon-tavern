@@ -51,7 +51,7 @@
     border: none;
 }
   
-/* Иконка для диапазона 0-15% */
+/* Icon for the range 0-15% */
 .sun-icon::-webkit-slider-thumb {
     background: url('/icons/sun.png') no-repeat center;
     background-size: contain;
@@ -62,7 +62,7 @@ background: url('/icons/sun.png') no-repeat center;
 background-size: contain;
 }
 
-/* Иконка для диапазона 15-30% */
+/* Icon for the range 15-30% */
 .cloudy-icon::-webkit-slider-thumb {
 background: url('/icons/cloudy.png') no-repeat center;
 background-size: contain;
@@ -73,7 +73,7 @@ background: url('/icons/cloudy.png') no-repeat center;
 background-size: contain;
 }
 
-/* Иконка для диапазона 30-50% */
+/* Icon for the range 30-50% */
 .rainy-icon::-webkit-slider-thumb {
 background: url('/icons/rainy.png') no-repeat center;
 background-size: contain;
@@ -84,7 +84,7 @@ background: url('/icons/rainy.png') no-repeat center;
 background-size: contain;
 }
 
-/* Иконка для диапазона 50-75% */
+/* Icon for the range 50-75% */
 .shower-icon::-webkit-slider-thumb {
 background: url('/icons/shower.png') no-repeat center;
 background-size: contain;
@@ -95,7 +95,7 @@ background: url('/icons/shower.png') no-repeat center;
 background-size: contain;
 }
 
-/* Иконка для диапазона 75-100% */
+/* Icon for the range 75-100% */
 .thunderstorm-icon::-webkit-slider-thumb {
 background: url('/icons/thunderstorm.png') no-repeat center;
 background-size: contain;

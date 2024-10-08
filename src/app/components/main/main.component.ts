@@ -36,13 +36,13 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.locationService.selectedLocation$.subscribe(location => {
       if (location) {
-        this.locationName = location.name; // Обновляем имя выбранной локации
+        this.locationName = location.name; // Update the name of the selected location
         this.backgroundImage = location.backgroundImage;
       }
     });
   }
 
-  // Переход на страницу выбора локации
+  // Go to the location selection page
   navigateToLocations() {
     this.router.navigate(['/']);
     this.locationName = 'Tavern';
@@ -50,7 +50,7 @@ export class MainComponent implements OnInit {
     this.isMainContentVisible = false;
   }
 
-  // Метод для переключения отображения main-content
+  // Method to toggle display of main-content
   toggleMainContent() {
     this.isMainContentVisible = true;
     this.router.navigate(['/locations']);

@@ -35,7 +35,7 @@ export class SnowfallComponent implements OnInit, AfterViewInit {
   private _snowIntensity: number = 15;
 
   private snowflakes: Snowflake[] = [];
-  private maxSnowflakesCount = 500; // Максимальное количество снежинок
+  private maxSnowflakesCount = 500;
   private snowflakeCount!: number;
 
   constructor() {}
@@ -103,10 +103,10 @@ export class SnowfallComponent implements OnInit, AfterViewInit {
       this.ctxSnow.fillStyle = `rgba(255, 255, 255, ${snowflake.opacity})`;
       this.ctxSnow.fill();
 
-      // Обновляем положение снежинки
+      // Update the position of the snowflake
       snowflake.y += snowflake.speedY;
 
-      // Если снежинка выходит за пределы экрана, возвращаем её наверх
+      // If the snowflake goes beyond the screen, we return it to the top
       if (snowflake.y > this.canvasHeight) {
         snowflake.y = -snowflake.radius;
         snowflake.x = Math.random() * this.canvasWidth;

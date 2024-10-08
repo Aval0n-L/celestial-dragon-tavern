@@ -17,19 +17,10 @@ Music by <a href="https://pixabay.com/users/composiia-38203768/?utm_source=link-
 
 
 
+Logic and Architecture Modularity and Usability: Separating code into components increases the modularity of the application. This is the maximum support and maintenance code, allowing you to reuse components in applications of different parts.
 
-Logic and architecture
-Модульность и поддерживаемость:
-Разделение кода на отдельные компоненты повышает модульность приложения. Это упрощает поддержку и развитие кода, позволяет повторно использовать компоненты в разных частях приложения.
+Separation of Concerns: Each component is responsible for its specific function. This is in line with SOLID principles and best development practices.
 
-Разделение ответственности:
-Каждый компонент отвечает за свою конкретную функциональность. Это соответствует принципам SOLID и лучшим практикам разработки.
+Performance: Using <canvas> to animate a large number of objects (for example, raindrops) is more efficient than handling DOM elements. <canvas> allows you to draw graphs directly, which reduces the load on the browser and improves performance.
 
-
-
-
-Производительность:
-Использование <canvas> для анимации большого количества объектов (например, капель дождя) более эффективно, чем манипуляции с DOM-элементами. <canvas> позволяет рисовать графику напрямую, что снижает нагрузку на браузер и улучшает производительность.
-
-Гладкость анимации:
-Анимации на <canvas> часто выглядят более плавно, особенно при большом количестве объектов.
+Smoothness of Animation: Animations on <canvas> often look smoother, especially with a large number of objects.

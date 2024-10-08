@@ -24,7 +24,7 @@ export class ThunderstormComponent implements OnInit, AfterViewInit {
   @ViewChild('thunderstormContainer', { static: true })
   thunderstormContainerRef!: ElementRef<HTMLDivElement>;
 
-  private _weatherIntensity: number = 15; // Значение по умолчанию
+  private _weatherIntensity: number = 15;
 
   private ctxRainTrough!: CanvasRenderingContext2D;
   private ctxRain!: CanvasRenderingContext2D;
@@ -35,7 +35,7 @@ export class ThunderstormComponent implements OnInit, AfterViewInit {
 
   private maxRainTroughCount = 500;
   private maxRainCount = 500;
-  private maxLightningFrequency = 200; // Максимальное время между молниями
+  private maxLightningFrequency = 200;
 
   private rainTroughCount!: number;
   private rainTroughSpeed = 25;
