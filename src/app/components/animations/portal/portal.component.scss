@@ -1,3 +1,10 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
 // Define root CSS variables for dynamic properties
 :root {
 --deg: 1;        // Degree of rotation (unused in this code)
@@ -18,17 +25,16 @@
     height: 0.9em;
     border-radius: 90% 95% 85% 105%;
 
-    // Gradient background from white to pink to purple
-    //background: #680068;
-    background: purple;
+    background: rgba(160, 70, 220, 0.32);
+    opacity: 0.62;
 
     mix-blend-mode: screen;
     filter: hue-rotate(0deg);
     animation: wobble var(--speed) linear infinite;
 
     box-shadow:
-        0 0 .5em .2em #3d004d inset, // Inner shadow for depth
-        0 0 0.15em 0 #db4dff;        // Outer glow effect
+        0 0 .5em .2em rgba(61, 0, 77, 0.28) inset,
+        0 0 1.2em 0.4em rgba(219, 77, 255, 0.35);
 
     display: flex;
     align-items: center;
@@ -44,32 +50,38 @@
     &:nth-child(1) {
         --x: -53%; 
         --y: -53%;
-        --speed: 7s; /* Unique speed for each element */
+        --speed: 7s;
+        opacity: 0.75;
     }
     &:nth-child(2) {
         --x: -47%;
         --y: -52%;
         --speed: 10s;
+        opacity: 0.68;
     }
     &:nth-child(3) {
         --x: -45%;
         --y: -50%;
         --speed: 6s;
+        opacity: 0.62;
     }
     &:nth-child(4) {
         --x: -53%;
         --y: -45%;
         --speed: 12s;
+        opacity: 0.55;
     }
     &:nth-child(5) {
         --x: -55%;
         --y: -45%;
         --speed: 9s;
+        opacity: 0.48;
     }
     &:nth-child(6) {
         --x: -57%;
         --y: -45%;
         --speed: 8s;
+        opacity: 0.42;
     }
 }
 

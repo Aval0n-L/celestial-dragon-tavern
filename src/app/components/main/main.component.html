@@ -3,11 +3,13 @@
 <!--==================-->
 
 <!--=====BACKGROUND=====-->
-<div class="backplace" [style.backgroundImage]="backgroundImage">
+<div class="backplace" [style.backgroundImage]="backgroundImage" [attr.data-time-of-day]="timeOfDay">
+  <app-time-overlay></app-time-overlay>
+  <app-weather-overlay></app-weather-overlay>
   <div class="location">
       <button class="location-name-button" (click)="navigateToLocations()">{{ locationName }}</button>
   </div>
-  <div>
+  <div class="portal-wrap">
     <app-portal (click)="toggleMainContent()"></app-portal>
   </div>
 </div>

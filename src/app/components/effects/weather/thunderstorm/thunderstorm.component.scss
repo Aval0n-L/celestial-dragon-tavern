@@ -13,11 +13,13 @@
 /* Контейнер для анимации */
 .thunderstorm-container {
   @include full-size;
-  @include absolute-position;
+  position: fixed;
+  top: 0;
+  left: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 1000;
+  z-index: 2;
   pointer-events: none;
 
   &:after {

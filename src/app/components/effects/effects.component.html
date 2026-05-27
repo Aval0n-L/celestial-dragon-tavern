@@ -6,13 +6,15 @@
     <div class="effect-group">
         <h3>Time</h3>
         <div class="buttons">
-            <button (click)="setTime('Dawn')">Dawn</button>
-            <button (click)="setTime('Midday')">Midday</button>
-            <button (click)="setTime('Day')">Day</button>
-            <button (click)="setTime('Evening')">Evening</button>
-            <button (click)="setTime('Twilight')">Twilight</button>
-            <button (click)="setTime('Night')">Night</button>
-            <button (click)="setTime('Midnight')">Midnight</button>
+            <button
+                *ngFor="let time of timeOptions"
+                (click)="setTime(time)"
+                [ngClass]="{
+                    'active-btn': activeTime === time.toLowerCase(),
+                    'glow-btn': activeTime !== time.toLowerCase()
+                }">
+                {{ time }}
+            </button>
         </div>
     </div>
 

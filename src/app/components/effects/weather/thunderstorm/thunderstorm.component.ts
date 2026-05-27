@@ -47,6 +47,7 @@ export class ThunderstormComponent implements OnInit, AfterViewInit {
   private lightningBolts: LightningBolt[] = [];
   private lightningTimer = 0;
   private lightningInterval!: number;
+  private screenFlash = 0;
 
   constructor() {}
 
@@ -141,6 +142,7 @@ export class ThunderstormComponent implements OnInit, AfterViewInit {
     this.animateRainTrough();
     this.animateRain();
     this.animateLightning();
+    this.drawScreenFlash();
 
     requestAnimationFrame(() => this.animate());
   }
@@ -195,6 +197,7 @@ export class ThunderstormComponent implements OnInit, AfterViewInit {
   private createLightningBolts(): void {
     const x = this.getRandomNumber(100, this.canvasWidth - 100);
     const y = this.getRandomNumber(0, this.canvasHeight / 4);
+    this.screenFlash = Math.min(1, 0.55 + this._weatherIntensity / 180);
 
     const boltCount = this.getRandomInt(1, 3);
     for (let i = 0; i < boltCount; i++) {
@@ -242,8 +245,11 @@ export class ThunderstormComponent implements OnInit, AfterViewInit {
         continue;
       }
 
-      this.ctxLightning.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-      this.ctxLightning.lineWidth = this.getRandomInt(3, 8);
+      const boltOpacity = Math.min(1, 0.35 + this._weatherIntensity / 150);
+      this.ctxLightning.strokeStyle = `rgba(220, 230, 255, ${boltOpacity})`;
+      this.ctxLightning.shadowBlur = 18;
+      this.ctxLightning.shadowColor = 'rgba(180, 200, 255, 0.9)';
+      this.ctxLightning.lineWidth = this.getRandomInt(2, 5);
       this.ctxLightning.beginPath();
       this.ctxLightning.moveTo(bolt.startX, bolt.startY);
 
@@ -251,13 +257,19 @@ export class ThunderstormComponent implements OnInit, AfterViewInit {
         this.ctxLightning.lineTo(point.x, point.y);
       }
 
-      if (this.getRandomInt(0, 30) === 1) {
-        this.ctxLightning.fillStyle = `rgba(255, 255, 255, ${this.getRandomNumber(0.01, 0.03)})`;
-        this.ctxLightning.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
-      }
-
       this.ctxLightning.stroke();
+      this.ctxLightning.shadowBlur = 0;
     }
+  }
+
+  private drawScreenFlash(): void {
+    if (this.screenFlash <= 0.01) {
+      return;
+    }
+
+    this.ctxLightning.fillStyle = `rgba(235, 242, 255, ${this.screenFlash})`;
+    this.ctxLightning.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+    this.screenFlash *= 0.88;
   }
 
   private getRandomNumber(min: number, max: number): number {

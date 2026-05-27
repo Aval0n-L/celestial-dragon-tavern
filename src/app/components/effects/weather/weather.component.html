@@ -18,55 +18,8 @@
             [ngClass]="{
                 'active-btn': activeWeather === weather, 
                 'glow-btn': activeWeather !== weather
-                }"> <!-- 'lock': isLocked -->
+                }">
             {{ weather }}
         </button>
-        <div *ngIf="isClearSky()" class="clear-sky-container">
-            <app-clear-sky [cloudIntensity]="weatherIntensity"></app-clear-sky>
-        </div>
-        <div *ngIf="isFog()" class="fog-container">
-            <app-fog [fogIntensity]="weatherIntensity"></app-fog>
-        </div>
-        <div *ngIf="isWindy()" class="fog-container">
-            <app-windy [windIntensity]="weatherIntensity"></app-windy>
-        </div>
-        <div *ngIf="isRain()" class="rain-container">
-            <app-rain 
-                [rainIntensity]="weatherIntensity"
-                [rainColor]="weatherColor">
-            </app-rain>
-        </div>
-        <div *ngIf="isThunderstorm()" class="thunderstorm-container">
-            <app-thunderstorm [weatherIntensity]="weatherIntensity"></app-thunderstorm>
-        </div>
-        <div *ngIf="isTropicalstorm()">
-            <app-tropical-storm [tropicalStormIntensity]="weatherIntensity"></app-tropical-storm>
-        </div>
-        <div *ngIf="isSandstorm()">
-            <app-sand-storm [sandStormIntensity]="weatherIntensity"></app-sand-storm>
-        </div>
-        <!-- <div *ngIf="isEtherealStorm()">
-            <app-ethereal-storm [etherealStormIntensity]="weatherIntensity" ></app-ethereal-storm>
-        </div> -->
-
-
-        <div *ngIf="isSnowfall()">
-            <app-snowfall [snowIntensity]="weatherIntensity"></app-snowfall>
-        </div>
-        <div *ngIf="isBlizzard()">
-            <app-blizzard [blizzardIntensity]="weatherIntensity"></app-blizzard>
-        </div>
     </div>
-    <!-- <div class="buttons">
-        <button (click)="toggleWeather('Clear Sky')" class="clear">Clear Sky</button>
-        <button (click)="toggleWeather('Overcast')" class="overcast">Overcast</button>
-        <button (click)="toggleWeather('Heatwave')">Heatwave</button>
-        <button (click)="toggleWeather('Dust Storm')">Dust Storm</button>
-        <button (click)="toggleWeather('Tropical Storm')">Tropical Storm</button>
-        <button (click)="toggleWeather('Ethereal Storm')">Ethereal Storm</button>
-        <button (click)="toggleWeather('Acid Rain')">Acid Rain</button>
-        <button (click)="toggleWeather('Lightning Storm')">Lightning Storm</button>
-        <button (click)="toggleWeather('Purple Rain')">Purple Rain</button>
-        <button (click)="toggleWeather('Meteor Shower')">Meteor Shower</button>
-    </div> -->
 </div>

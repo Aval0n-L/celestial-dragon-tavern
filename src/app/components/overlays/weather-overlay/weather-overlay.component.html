@@ -1,0 +1,32 @@
+@if (state.activeWeather) {
+  @if (isClearSky()) {
+    <app-clear-sky [cloudIntensity]="state.intensity"></app-clear-sky>
+  }
+  @if (isFog()) {
+    <app-fog [fogIntensity]="state.intensity"></app-fog>
+  }
+  @if (isWindy()) {
+    <app-windy [windIntensity]="state.intensity"></app-windy>
+  }
+  @if (isRain()) {
+    <app-rain
+      [rainIntensity]="state.intensity"
+      [rainColor]="state.color">
+    </app-rain>
+  }
+  @if (isThunderstorm()) {
+    <app-thunderstorm [weatherIntensity]="state.intensity"></app-thunderstorm>
+  }
+  @if (isTropicalstorm()) {
+    <app-tropical-storm [tropicalStormIntensity]="state.intensity"></app-tropical-storm>
+  }
+  @if (isSandstorm()) {
+    <app-sand-storm [sandStormIntensity]="state.intensity"></app-sand-storm>
+  }
+  @if (isSnowfall()) {
+    <app-snowfall [snowIntensity]="state.intensity"></app-snowfall>
+  }
+  @if (isBlizzard()) {
+    <app-blizzard [blizzardIntensity]="state.intensity"></app-blizzard>
+  }
+}

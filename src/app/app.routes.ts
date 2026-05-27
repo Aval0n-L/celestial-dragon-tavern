@@ -4,8 +4,13 @@ import { EffectsComponent } from './components/effects/effects.component';
 import { MainComponent } from './components/main/main.component';
 
 export const routes: Routes = [
-    { path: '', component: MainComponent }, // Главная страница
-    { path: 'locations', component: LocationsComponent }, // Выбор локации
-    { path: 'effects', component: EffectsComponent }, // Эффекты после выбора локации
-    { path: '**', redirectTo: '' } // Редирект на главную, если путь не найден
+    {
+        path: '',
+        component: MainComponent,
+        children: [
+            { path: 'locations', component: LocationsComponent },
+            { path: 'effects', component: EffectsComponent },
+        ]
+    },
+    { path: '**', redirectTo: '' }
 ];

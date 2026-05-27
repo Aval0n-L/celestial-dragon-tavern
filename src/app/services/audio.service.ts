@@ -35,4 +35,10 @@ export class AudioService {
       this.pauseSound(key);
     }
   }
+
+  playOneShot(path: string, volume: number = 75) {
+    const audio = new Audio(path);
+    audio.volume = volume / 100;
+    audio.play();
+  }
 }
